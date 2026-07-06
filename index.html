@@ -477,7 +477,6 @@
             background: #141f33;
         }
 
-        /* Title dengan icon 📌 */
         .memo-card .memo-title {
             color: #ffd700;
             font-weight: 700;
@@ -486,7 +485,6 @@
             padding-right: 100px;
         }
 
-        /* Body - teks biasa tanpa format berlebihan */
         .memo-card .memo-body {
             color: #c0c0c0;
             font-size: 14px;
@@ -494,18 +492,6 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             padding-right: 100px;
-        }
-
-        /* Note styling */
-        .memo-card .memo-body .note-label {
-            color: #ffd700;
-            font-weight: 600;
-        }
-
-        /* Contoh styling */
-        .memo-card .memo-body .example-label {
-            color: #00d2ff;
-            font-weight: 600;
         }
 
         .memo-card .memo-actions {
@@ -676,6 +662,10 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .admin-panel textarea {
+                min-width: unset !important;
+            }
         }
     </style>
 </head>
@@ -734,7 +724,7 @@
                 <div class="combined-content" id="combinedContent">
                     <span class="line">
                         <span class="label">Used Id : </span>
-                        <span class="value-userid empty" id="userIdDisplay">(kosong)</span>
+                        <span class="value-userid empty" id="userIdDisplay"></span>
                     </span>
                     <span class="line">
                         <span class="label">Password : </span>
@@ -953,11 +943,10 @@
             }
 
             memoList.innerHTML = memos.map(memo => {
-                // Format body dengan line breaks
                 const bodyHtml = escapeHtml(memo.body || '').replace(/\n/g, '<br>');
                 
                 return `
-                    <div class="memo-card" data-id="${memo.id}">
+                    <div class="memo-card" data-id="${memo.id}" data-body="${escapeHtml(memo.body || '')}">
                         <div class="memo-title">📌 ${escapeHtml(memo.title || 'Tanpa Judul')}</div>
                         <div class="memo-body">${bodyHtml}</div>
                         <span class="memo-id">ID: ${memo.id.substring(0, 8)}</span>
@@ -1053,18 +1042,15 @@
                 return;
             }
 
-            // Ambil title (tanpa icon 📌)
-            const titleElement = memoCard.querySelector('.memo-title');
-            const title = titleElement.textContent.replace('📌 ', '').trim();
+            // Ambil body dari data attribute (tanpa HTML formatting)
+            const body = memoCard.dataset.body || '';
             
-            // Ambil body
-            const bodyElement = memoCard.querySelector('.memo-body');
-            const body = bodyElement.textContent.trim();
-            
-            // Format: title di baris pertama, lalu body dengan format asli
-            const fullText = `${title}\n\n${body}`;
+            if (!body.trim()) {
+                showToast('⚠️ Tidak ada isi memo untuk disalin');
+                return;
+            }
 
-            copyToClipboard(fullText, '✅ Memo berhasil disalin!');
+            copyToClipboard(body, '✅ Isi memo berhasil disalin!');
         }
 
         // ===================== PAGE SWITCH =====================
