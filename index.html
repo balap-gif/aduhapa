@@ -406,7 +406,7 @@
             font-weight: 600;
         }
 
-        /* ===================== MEMO STYLE BARU ===================== */
+        /* ===================== MEMO STYLE ===================== */
         .memo-container {
             display: flex;
             flex-direction: column;
@@ -459,7 +459,11 @@
             color: #556677;
         }
 
-        /* Memo Card */
+        .admin-panel .btn-danger {
+            margin-top: 10px;
+        }
+
+        /* Memo Card - Format Baru */
         .memo-card {
             background: #0f1a2e;
             border-radius: 10px;
@@ -473,21 +477,35 @@
             background: #141f33;
         }
 
+        /* Title dengan icon 📌 */
         .memo-card .memo-title {
             color: #ffd700;
             font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 6px;
-            padding-right: 120px;
+            font-size: 16px;
+            margin-bottom: 8px;
+            padding-right: 100px;
         }
 
+        /* Body - teks biasa tanpa format berlebihan */
         .memo-card .memo-body {
             color: #c0c0c0;
-            font-size: 13px;
-            line-height: 1.7;
+            font-size: 14px;
+            line-height: 1.8;
             white-space: pre-wrap;
             word-wrap: break-word;
             padding-right: 100px;
+        }
+
+        /* Note styling */
+        .memo-card .memo-body .note-label {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        /* Contoh styling */
+        .memo-card .memo-body .example-label {
+            color: #00d2ff;
+            font-weight: 600;
         }
 
         .memo-card .memo-actions {
@@ -522,32 +540,7 @@
             margin-bottom: 10px;
         }
 
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #1a2a4a;
-            color: #fff;
-            padding: 14px 30px;
-            border-radius: 10px;
-            font-size: 15px;
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 999;
-            pointer-events: none;
-            max-width: 90%;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* Admin Login Button */
+        /* Admin Login Status */
         .admin-login-btn {
             background: #0f1a2e;
             padding: 12px 20px;
@@ -572,6 +565,31 @@
 
         .admin-login-btn .user-email {
             color: #00d2ff;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1a2a4a;
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-size: 15px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 999;
+            pointer-events: none;
+            max-width: 90%;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         /* Responsive */
@@ -731,7 +749,6 @@
 
             <!-- Two Column Section -->
             <div class="two-column">
-                <!-- Kolom Kiri -->
                 <div class="column-box">
                     <div class="copy-btn">
                         <button class="btn btn-warning btn-sm" onclick="copyColumnLeft()">
@@ -747,7 +764,6 @@
                     </div>
                 </div>
 
-                <!-- Kolom Kanan -->
                 <div class="column-box">
                     <div class="copy-btn">
                         <button class="btn btn-warning btn-sm" onclick="copyColumnRight()">
@@ -783,17 +799,15 @@
                 </div>
             </div>
 
-            <!-- Admin Panel (Hanya untuk admin) -->
+            <!-- Admin Panel -->
             <div class="admin-panel" id="adminPanel">
                 <h4>👑 Panel Admin - Tambah Memo Baru</h4>
                 <div class="input-group">
-                    <input type="text" id="memoTitleInput" placeholder="Judul Memo (contoh: CARA DEPOSIT)">
-                    <input type="text" id="memoBodyInput" placeholder="Isi Memo (contoh: Langkah-langkah deposit...)">
-                    <button class="btn btn-success" onclick="addMemo()">➕ Tambah</button>
+                    <input type="text" id="memoTitleInput" placeholder="Judul Memo (contoh: QRIS MAINTENANCE)">
+                    <textarea id="memoBodyInput" placeholder="Isi Memo (contoh: mohon maaf bosku...)" style="flex:2; min-width:300px; padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:#0a1428; color:#fff; font-size:14px; outline:none; resize:vertical; min-height:80px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;"></textarea>
+                    <button class="btn btn-success" onclick="addMemo()" style="align-self:flex-start;">➕ Tambah</button>
                 </div>
-                <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()">🗑️ Hapus Semua</button>
-                </div>
+                <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()" style="margin-top:10px;">🗑️ Hapus Semua</button>
             </div>
 
             <!-- Memo List -->
@@ -811,7 +825,6 @@
 
     <script>
         // ===================== FIREBASE CONFIG =====================
-        // 🔥 GANTI DENGAN CONFIG DARI FIREBASE PROJECT ANDA 🔥
         const firebaseConfig = {
   apiKey: "AIzaSyD9cp_BeXbBE6li9A4iyplxzaSMSqrlfrY",
   authDomain: "ganyang-bf952.firebaseapp.com",
@@ -822,7 +835,6 @@
   appId: "1:387233630892:web:ab39554507ff926c956d09"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const database = firebase.database();
@@ -839,12 +851,10 @@
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
-                .then((result) => {
+                .then(() => {
                     showToast('✅ Login admin berhasil!');
-                    document.getElementById('loginError').style.display = 'none';
                 })
                 .catch((error) => {
-                    console.error('Login error:', error);
                     showToast('❌ Login gagal: ' + error.message);
                 });
         }
@@ -863,7 +873,6 @@
                 const email = user.email;
                 isAdmin = (email === ADMIN_EMAIL);
 
-                // Update UI admin status
                 document.getElementById('adminEmailDisplay').textContent = email;
                 document.getElementById('loginAdminBtn').style.display = 'none';
                 document.getElementById('logoutAdminBtn').style.display = 'inline-flex';
@@ -891,7 +900,6 @@
                 document.getElementById('adminPanel').classList.remove('visible');
             }
 
-            // Load memo (selalu load untuk semua user)
             loadMemos();
         });
 
@@ -904,22 +912,15 @@
                 const memoList = document.getElementById('memoList');
                 
                 if (data) {
-                    // Convert object ke array
                     const memos = Object.keys(data).map(key => ({
                         id: key,
                         ...data[key]
                     }));
                     
-                    // Urutkan berdasarkan timestamp (terbaru di atas)
                     memos.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                    
-                    // Render memo
                     renderMemos(memos);
-                    
-                    // Update badge
                     document.getElementById('memoBadge').textContent = memos.length;
                 } else {
-                    // Tidak ada memo
                     memoList.innerHTML = `
                         <div class="empty-memo">
                             <div class="icon">📭</div>
@@ -929,7 +930,6 @@
                     document.getElementById('memoBadge').textContent = '0';
                 }
             }, (error) => {
-                console.error('Error loading memos:', error);
                 document.getElementById('memoList').innerHTML = `
                     <div class="empty-memo">
                         <div class="icon">❌</div>
@@ -952,19 +952,30 @@
                 return;
             }
 
-            memoList.innerHTML = memos.map(memo => `
-                <div class="memo-card" data-id="${memo.id}">
-                    <div class="memo-title">📌 ${memo.title || 'Tanpa Judul'}</div>
-                    <div class="memo-body">${memo.body || ''}</div>
-                    <span class="memo-id">ID: ${memo.id.substring(0, 8)}</span>
-                    <div class="memo-actions">
-                        <button class="btn btn-copy btn-sm" onclick="copyMemo('${memo.id}')">📋 Copy</button>
-                        ${isAdmin ? `
-                            <button class="btn btn-danger btn-sm" onclick="deleteMemo('${memo.id}')">🗑️</button>
-                        ` : ''}
+            memoList.innerHTML = memos.map(memo => {
+                // Format body dengan line breaks
+                const bodyHtml = escapeHtml(memo.body || '').replace(/\n/g, '<br>');
+                
+                return `
+                    <div class="memo-card" data-id="${memo.id}">
+                        <div class="memo-title">📌 ${escapeHtml(memo.title || 'Tanpa Judul')}</div>
+                        <div class="memo-body">${bodyHtml}</div>
+                        <span class="memo-id">ID: ${memo.id.substring(0, 8)}</span>
+                        <div class="memo-actions">
+                            <button class="btn btn-copy btn-sm" onclick="copyMemo('${memo.id}')">📋 Copy</button>
+                            ${isAdmin ? `
+                                <button class="btn btn-danger btn-sm" onclick="deleteMemo('${memo.id}')">🗑️</button>
+                            ` : ''}
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // ===================== CRUD MEMO =====================
@@ -1036,16 +1047,22 @@
         }
 
         function copyMemo(memoId) {
-            // Ambil teks dari memo card
             const memoCard = document.querySelector(`.memo-card[data-id="${memoId}"]`);
             if (!memoCard) {
                 showToast('⚠️ Memo tidak ditemukan');
                 return;
             }
 
-            const title = memoCard.querySelector('.memo-title').textContent.replace('📌 ', '');
-            const body = memoCard.querySelector('.memo-body').textContent;
-            const fullText = `📌 ${title}\n\n${body}`;
+            // Ambil title (tanpa icon 📌)
+            const titleElement = memoCard.querySelector('.memo-title');
+            const title = titleElement.textContent.replace('📌 ', '').trim();
+            
+            // Ambil body
+            const bodyElement = memoCard.querySelector('.memo-body');
+            const body = bodyElement.textContent.trim();
+            
+            // Format: title di baris pertama, lalu body dengan format asli
+            const fullText = `${title}\n\n${body}`;
 
             copyToClipboard(fullText, '✅ Memo berhasil disalin!');
         }
@@ -1195,3 +1212,21 @@ Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
 
 </body>
 </html>
+<script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) e.preventDefault();
+    if (e.ctrlKey && e.key.toUpperCase() === 'U') e.preventDefault();
+});
+
+setInterval(() => {
+    const before = new Date();
+    debugger;
+    const after = new Date();
+    if (after - before > 100) {
+        document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;">Akses ditolak</h1>';
+    }
+}, 1000);
+</script>
