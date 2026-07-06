@@ -73,6 +73,7 @@
             margin-bottom: 25px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .nav-tab {
@@ -261,17 +262,18 @@
         .btn-google {
             background: #ffffff;
             color: #333;
-            padding: 10px 25px;
-            font-size: 15px;
+            padding: 12px 30px;
+            font-size: 16px;
             border: 1px solid #ddd;
         }
 
         .btn-google:hover {
             background: #f0f0f0;
             transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
         }
 
-        .btn-google img {
+        .btn-google svg {
             width: 20px;
             height: 20px;
         }
@@ -461,7 +463,7 @@
         }
 
         .memo-editor textarea:disabled {
-            opacity: 0.7;
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
@@ -486,6 +488,7 @@
             font-size: 14px;
             white-space: pre-wrap;
             word-wrap: break-word;
+            position: relative;
         }
 
         .memo-display.empty {
@@ -493,26 +496,40 @@
             font-style: italic;
         }
 
-        .memo-copy-btn {
-            margin-top: 10px;
-            display: flex;
-            justify-content: flex-end;
+        .memo-display .copy-memo-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
 
         /* Login Section */
         .login-section {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
+            background: #0f1a2e;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
 
         .login-section h2 {
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .login-section p {
             color: #8899aa;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .login-section .error-msg {
+            color: #e94560;
+            font-size: 13px;
+            margin-top: 10px;
+            background: rgba(233, 69, 96, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid #e94560;
         }
 
         /* Toast */
@@ -532,17 +549,12 @@
             transition: all 0.4s ease;
             z-index: 999;
             pointer-events: none;
+            max-width: 90%;
         }
 
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
-        }
-
-        .loading {
-            color: #8899aa;
-            text-align: center;
-            padding: 20px;
         }
 
         /* Responsive */
@@ -611,6 +623,13 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .memo-display .copy-memo-btn {
+                position: static;
+                margin-top: 10px;
+                display: flex;
+                justify-content: flex-end;
+            }
         }
     </style>
 </head>
@@ -625,20 +644,27 @@
             </div>
         </div>
 
-        <!-- Login / User Info -->
-        <div id="authSection" style="margin-bottom: 20px;">
-            <div id="userInfo" style="display: none; background: #0f1a2e; padding: 15px 20px; border-radius: 10px; border-left: 4px solid #00d2ff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <!-- Login Section - HANYA UNTUK MEMO -->
+        <div id="authSection">
+            <div id="userInfo" style="display: none; background: #0f1a2e; padding: 15px 20px; border-radius: 10px; border-left: 4px solid #00d2ff; display: none; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
                 <div style="color: #e0e0e0; font-size: 14px;">
                     👤 <span id="userEmail" style="color: #00d2ff;">user@gmail.com</span>
                     <span id="userRole" style="background: #ffd700; color: #0a0a1a; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 8px;">OWNER</span>
                 </div>
                 <button class="btn btn-danger btn-sm" onclick="logoutUser()">🚪 Logout</button>
             </div>
-            <div id="loginBtn" style="display: block;">
-                <button class="btn btn-google" onclick="loginWithGoogle()" style="width: 100%; justify-content: center;">
+
+            <div id="loginSection" class="login-section" style="display: none;">
+                <h2>🔐 Login untuk Mengakses Memo</h2>
+                <p>Login dengan Google untuk melihat dan mengelola memo</p>
+                <button class="btn btn-google" onclick="loginWithGoogle()">
                     <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                     Login dengan Google
                 </button>
+                <div id="loginError" class="error-msg" style="display: none;">
+                    ⚠️ <strong>Error:</strong> <span id="errorText">Domain tidak diizinkan</span><br>
+                    <small style="color: #8899aa;">Solusi: Tambahkan domain ini di Firebase Console → Authentication → Settings → Authorized Domains</small>
+                </div>
             </div>
         </div>
 
@@ -649,11 +675,11 @@
             </button>
             <button class="nav-tab" data-page="memo" onclick="switchPage('memo')">
                 📝 Memo & Pemberitahuan
-                <span class="badge" id="memoBadge">●</span>
+                <span class="badge" id="memoBadge" style="background: #00c853;">●</span>
             </button>
         </div>
 
-        <!-- Page: Password Generator -->
+        <!-- Page: Password Generator - TANPA LOGIN -->
         <div class="page active" id="page-password">
             <!-- Password Display -->
             <div class="password-section">
@@ -662,7 +688,7 @@
                     <span style="color: #556677; font-size: 11px;">auto-generated</span>
                 </div>
                 <div class="password-display">
-                    <div id="passwordDisplay">Ce*q+V605</div>
+                    <div id="passwordDisplay">!NH)Ge83k</div>
                     <button class="btn btn-copy" onclick="copyPasswordOnly()">
                         📋 Copy
                     </button>
@@ -690,7 +716,7 @@
                     </span>
                     <span class="line">
                         <span class="label">Password : </span>
-                        <span class="value-password" id="passwordDisplay3">Ce*q+V605</span>
+                        <span class="value-password" id="passwordDisplay3">!NH)Ge83k</span>
                     </span>
                     <span class="line check-message-text">silakan di cek login ya bosku.</span>
                     <span class="line note-text">
@@ -735,7 +761,7 @@
             </div>
         </div>
 
-        <!-- Page: Memo -->
+        <!-- Page: Memo - BUTUH LOGIN -->
         <div class="page" id="page-memo">
             <div class="memo-section">
                 <div class="memo-header">
@@ -764,8 +790,11 @@
 
                 <div style="margin-top: 20px;">
                     <h4 style="color: #8899aa; font-size: 13px; margin-bottom: 10px;">📄 Isi Memo:</h4>
-                    <div class="memo-display empty" id="memoDisplay">
-                        Belum ada memo. Silakan login sebagai owner untuk membuat memo.
+                    <div class="memo-display" id="memoDisplay">
+                        <span id="memoText">Memuat memo...</span>
+                        <button class="btn btn-sm btn-copy copy-memo-btn" onclick="copyMemo()" style="position: absolute; top: 10px; right: 10px;">
+                            📋 Copy
+                        </button>
                     </div>
                 </div>
             </div>
@@ -777,6 +806,7 @@
 
     <script>
         // ===================== FIREBASE CONFIG =====================
+        // 🔥 GANTI DENGAN CONFIG DARI FIREBASE PROJECT ANDA 🔥
         const firebaseConfig = {
   apiKey: "AIzaSyD9cp_BeXbBE6li9A4iyplxzaSMSqrlfrY",
   authDomain: "ganyang-bf952.firebaseapp.com",
@@ -806,29 +836,44 @@
             auth.signInWithPopup(provider)
                 .then((result) => {
                     showToast('✅ Login berhasil!');
+                    document.getElementById('loginError').style.display = 'none';
                 })
                 .catch((error) => {
                     console.error('Login error:', error);
-                    showToast('❌ Login gagal: ' + error.message);
+                    const errorMsg = document.getElementById('errorText');
+                    const errorDiv = document.getElementById('loginError');
+                    
+                    if (error.code === 'auth/unauthorized-domain') {
+                        errorMsg.textContent = 'Domain ini tidak terdaftar di Firebase.';
+                        errorDiv.style.display = 'block';
+                        showToast('❌ Domain tidak diizinkan. Silakan cek Firebase Console.');
+                    } else {
+                        errorMsg.textContent = error.message;
+                        errorDiv.style.display = 'block';
+                        showToast('❌ Login gagal: ' + error.message);
+                    }
                 });
         }
 
         function logoutUser() {
             auth.signOut().then(() => {
                 showToast('✅ Logout berhasil!');
+                // Refresh halaman untuk reset state
                 location.reload();
             });
         }
 
         // ===================== AUTH STATE =====================
         auth.onAuthStateChanged((user) => {
+            const loginSection = document.getElementById('loginSection');
+
             if (user) {
                 currentUser = user;
                 const email = user.email;
                 isOwner = (email === OWNER_EMAIL);
 
                 // Update UI
-                document.getElementById('loginBtn').style.display = 'none';
+                document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('userInfo').style.display = 'flex';
                 document.getElementById('userEmail').textContent = email;
 
@@ -852,44 +897,54 @@
 
                 // Load memo
                 loadMemo();
-
-                // Badge indicator
-                document.getElementById('memoBadge').style.display = 'none';
+                document.getElementById('memoBadge').style.display = 'inline';
             } else {
                 currentUser = null;
                 isOwner = false;
-                document.getElementById('loginBtn').style.display = 'block';
+                document.getElementById('loginSection').style.display = 'block';
                 document.getElementById('userInfo').style.display = 'none';
                 document.getElementById('memoStatus').textContent = '🔒 Belum Login';
                 document.getElementById('memoInput').disabled = true;
                 document.getElementById('saveMemoBtn').style.display = 'none';
                 document.getElementById('deleteMemoBtn').style.display = 'none';
-                document.getElementById('memoDisplay').textContent = 'Silakan login terlebih dahulu untuk melihat memo.';
-                document.getElementById('memoDisplay').className = 'memo-display empty';
+                document.getElementById('memoText').textContent = 'Silakan login terlebih dahulu untuk melihat memo.';
             }
         });
 
         // ===================== MEMO FUNCTIONS =====================
         function loadMemo() {
             const memoRef = database.ref(MEMO_PATH);
+            
+            // Set default memo jika belum ada
+            memoRef.once('value', (snapshot) => {
+                if (!snapshot.exists()) {
+                    const defaultMemo = `📢 PEMBERITAHUAN PENTING
+
+1. Untuk reset password, silakan hubungi admin.
+2. Jangan bagikan password kepada siapapun.
+3. Gunakan password yang kuat dan unik.
+
+Terima kasih atas kerjasamanya.`;
+                    memoRef.set(defaultMemo);
+                }
+            });
+
+            // Listen untuk perubahan real-time
             memoRef.on('value', (snapshot) => {
                 const data = snapshot.val();
-                const display = document.getElementById('memoDisplay');
+                const memoText = document.getElementById('memoText');
                 const input = document.getElementById('memoInput');
 
                 if (data) {
-                    display.textContent = data;
-                    display.className = 'memo-display';
+                    memoText.textContent = data;
                     input.value = data;
                 } else {
-                    display.textContent = 'Belum ada memo.';
-                    display.className = 'memo-display empty';
+                    memoText.textContent = 'Belum ada memo.';
                     input.value = '';
                 }
             }, (error) => {
                 console.error('Error loading memo:', error);
-                document.getElementById('memoDisplay').textContent = '❌ Gagal memuat memo: ' + error.message;
-                document.getElementById('memoDisplay').className = 'memo-display empty';
+                document.getElementById('memoText').textContent = '❌ Gagal memuat memo: ' + error.message;
             });
         }
 
@@ -928,8 +983,7 @@
                 .then(() => {
                     showToast('✅ Memo berhasil dihapus!');
                     document.getElementById('memoInput').value = '';
-                    document.getElementById('memoDisplay').textContent = 'Memo telah dihapus.';
-                    document.getElementById('memoDisplay').className = 'memo-display empty';
+                    document.getElementById('memoText').textContent = 'Memo telah dihapus.';
                 })
                 .catch((error) => {
                     showToast('❌ Gagal menghapus memo: ' + error.message);
@@ -937,10 +991,15 @@
         }
 
         function copyMemo() {
-            const display = document.getElementById('memoDisplay');
-            const text = display.textContent;
+            const memoText = document.getElementById('memoText');
+            const text = memoText.textContent;
 
-            if (text === 'Belum ada memo.' || text === 'Silakan login terlebih dahulu untuk melihat memo.' || text === 'Memo telah dihapus.') {
+            if (text === 'Memuat memo...' || text === 'Belum ada memo.' || text === 'Silakan login terlebih dahulu untuk melihat memo.' || text === 'Memo telah dihapus.') {
+                showToast('⚠️ Tidak ada memo untuk disalin');
+                return;
+            }
+
+            if (text.startsWith('❌')) {
                 showToast('⚠️ Tidak ada memo untuk disalin');
                 return;
             }
@@ -950,12 +1009,9 @@
 
         // ===================== PAGE SWITCH =====================
         function switchPage(page) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // Show selected page
             document.getElementById('page-' + page).classList.add('active');
 
-            // Update tabs
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.dataset.page === page) {
