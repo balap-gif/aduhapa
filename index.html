@@ -116,6 +116,53 @@
             display: block;
         }
 
+        /* User ID Input */
+        .userid-input-section {
+            background: #0f1a2e;
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .userid-input-section label {
+            color: #8899aa;
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 70px;
+        }
+
+        .userid-input-section input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0a1428;
+            color: #ffd700;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            outline: none;
+            letter-spacing: 0.5px;
+        }
+
+        .userid-input-section input:focus {
+            border-color: #ffd700;
+        }
+
+        .userid-input-section input::placeholder {
+            color: #556677;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .userid-input-section .btn {
+            padding: 10px 20px;
+        }
+
         /* Password Display */
         .password-section {
             background: #0f1a2e;
@@ -463,7 +510,7 @@
             margin-top: 10px;
         }
 
-        /* Memo Card - Format Baru */
+        /* Memo Card */
         .memo-card {
             background: #0f1a2e;
             border-radius: 10px;
@@ -666,6 +713,16 @@
             .admin-panel textarea {
                 min-width: unset !important;
             }
+
+            .userid-input-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .userid-input-section .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -693,6 +750,13 @@
 
         <!-- Page: Password Generator -->
         <div class="page active" id="page-password">
+            <!-- User ID Input Section -->
+            <div class="userid-input-section">
+                <label>🆔 User ID</label>
+                <input type="text" id="userIdInput" placeholder="Masukkan atau tempel User ID di sini..." oninput="updateUserId()">
+                <button class="btn btn-secondary btn-sm" onclick="clearUserId()">✖ Clear</button>
+            </div>
+
             <!-- Password Display -->
             <div class="password-section">
                 <div class="password-label">
@@ -815,7 +879,7 @@
 
     <script>
         // ===================== FIREBASE CONFIG =====================
-        const firebaseConfig = {
+       const firebaseConfig = {
   apiKey: "AIzaSyD9cp_BeXbBE6li9A4iyplxzaSMSqrlfrY",
   authDomain: "ganyang-bf952.firebaseapp.com",
   databaseURL: "https://ganyang-bf952-default-rtdb.firebaseio.com",
@@ -836,6 +900,27 @@
         let currentPassword = '';
         let currentUser = null;
         let isAdmin = false;
+
+        // ===================== USER ID FUNCTIONS =====================
+        function updateUserId() {
+            const input = document.getElementById('userIdInput');
+            const display = document.getElementById('userIdDisplay');
+            const value = input.value.trim();
+            
+            if (value) {
+                display.textContent = value;
+                display.className = 'value-userid';
+            } else {
+                display.textContent = '';
+                display.className = 'value-userid empty';
+            }
+        }
+
+        function clearUserId() {
+            document.getElementById('userIdInput').value = '';
+            updateUserId();
+            showToast('🆔 User ID telah dibersihkan');
+        }
 
         // ===================== AUTH =====================
         function loginWithGoogle() {
@@ -1042,7 +1127,6 @@
                 return;
             }
 
-            // Ambil body dari data attribute (tanpa HTML formatting)
             const body = memoCard.dataset.body || '';
             
             if (!body.trim()) {
@@ -1115,6 +1199,10 @@
         }
 
         function copyColumnLeft() {
+            // Ambil User ID yang sedang aktif
+            const userId = document.getElementById('userIdDisplay').textContent;
+            const userIdText = userId === '' ? '' : userId;
+            
             const text = `Mohon lengkapi data yang terdaftar ;
 - atas nama rekening (wajib) ;
 - no rekening (wajib) ;
@@ -1193,6 +1281,9 @@ Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
             currentPassword = generatePassword(9);
             document.getElementById('passwordDisplay').textContent = currentPassword;
             document.getElementById('passwordDisplay3').textContent = currentPassword;
+            
+            // Set default User ID
+            updateUserId();
         })();
     </script>
 
