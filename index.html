@@ -31,7 +31,7 @@
             background: linear-gradient(145deg, #1a1a2e, #16213e);
             padding: 35px;
             border-radius: 16px;
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -239,16 +239,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-warning {
-            background: #ff9800;
-            color: #fff;
-        }
-
-        .btn-warning:hover {
-            background: #e68900;
-            transform: translateY(-2px);
-        }
-
         .btn-danger {
             background: #e94560;
             color: #fff;
@@ -256,6 +246,16 @@
 
         .btn-danger:hover {
             background: #d63851;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: #ff9800;
+            color: #fff;
+        }
+
+        .btn-warning:hover {
+            background: #e68900;
             transform: translateY(-2px);
         }
 
@@ -406,130 +406,120 @@
             font-weight: 600;
         }
 
-        /* Memo Section */
-        .memo-section {
+        /* ===================== MEMO STYLE BARU ===================== */
+        .memo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
             background: #0f1a2e;
             padding: 20px 25px;
             border-radius: 12px;
-            border-left: 4px solid #ffd700;
+            border-left: 4px solid #00d2ff;
             margin-bottom: 20px;
+            display: none;
         }
 
-        .memo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
+        .admin-panel.visible {
+            display: block;
         }
 
-        .memo-header h3 {
-            color: #ffd700;
-            font-size: 18px;
-        }
-
-        .memo-header .user-info {
-            color: #8899aa;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .memo-header .user-info .email {
+        .admin-panel h4 {
             color: #00d2ff;
-        }
-
-        .memo-editor {
-            background: #0a1428;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.15);
-        }
-
-        .memo-editor textarea {
-            width: 100%;
-            min-height: 150px;
-            background: transparent;
-            border: none;
-            color: #e0e0e0;
             font-size: 14px;
-            line-height: 1.8;
-            resize: vertical;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-bottom: 12px;
+        }
+
+        .admin-panel .input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-panel input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0a1428;
+            color: #fff;
+            font-size: 14px;
             outline: none;
         }
 
-        .memo-editor textarea:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .admin-panel input:focus {
+            border-color: #00d2ff;
         }
 
-        .memo-editor textarea::placeholder {
+        .admin-panel input::placeholder {
             color: #556677;
         }
 
-        .memo-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        /* Memo Card */
+        .memo-card {
+            background: #0f1a2e;
+            border-radius: 10px;
+            padding: 18px 20px;
+            border-left: 3px solid #ffd700;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .memo-display {
-            background: #0a1428;
-            border-radius: 8px;
-            padding: 15px;
-            min-height: 100px;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            color: #e0e0e0;
-            line-height: 1.8;
-            font-size: 14px;
+        .memo-card:hover {
+            background: #141f33;
+        }
+
+        .memo-card .memo-title {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 6px;
+            padding-right: 120px;
+        }
+
+        .memo-card .memo-body {
+            color: #c0c0c0;
+            font-size: 13px;
+            line-height: 1.7;
             white-space: pre-wrap;
             word-wrap: break-word;
-            position: relative;
+            padding-right: 100px;
         }
 
-        .memo-display.empty {
-            color: #556677;
-            font-style: italic;
-        }
-
-        .memo-display .copy-memo-btn {
+        .memo-card .memo-actions {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 6px;
         }
 
-        /* Login Section */
-        .login-section {
+        .memo-card .memo-actions .btn {
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+
+        .memo-card .memo-id {
+            color: #556677;
+            font-size: 10px;
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* Empty State */
+        .empty-memo {
             text-align: center;
-            padding: 30px 20px;
-            background: #0f1a2e;
-            border-radius: 12px;
-            margin-bottom: 20px;
+            padding: 40px 20px;
+            color: #556677;
         }
 
-        .login-section h2 {
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .login-section p {
-            color: #8899aa;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .login-section .error-msg {
-            color: #e94560;
-            font-size: 13px;
-            margin-top: 10px;
-            background: rgba(233, 69, 96, 0.1);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border-left: 3px solid #e94560;
+        .empty-memo .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
         }
 
         /* Toast */
@@ -555,6 +545,33 @@
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* Admin Login Button */
+        .admin-login-btn {
+            background: #0f1a2e;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .admin-login-btn .info {
+            color: #8899aa;
+            font-size: 13px;
+        }
+
+        .admin-login-btn .info strong {
+            color: #ffd700;
+        }
+
+        .admin-login-btn .user-email {
+            color: #00d2ff;
         }
 
         /* Responsive */
@@ -619,16 +636,27 @@
                 text-align: center;
             }
 
-            .memo-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .memo-card .memo-title {
+                padding-right: 0;
             }
 
-            .memo-display .copy-memo-btn {
+            .memo-card .memo-body {
+                padding-right: 0;
+            }
+
+            .memo-card .memo-actions {
                 position: static;
                 margin-top: 10px;
-                display: flex;
                 justify-content: flex-end;
+            }
+
+            .admin-panel .input-group {
+                flex-direction: column;
+            }
+
+            .admin-panel .input-group .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -644,30 +672,6 @@
             </div>
         </div>
 
-        <!-- Login Section - HANYA UNTUK MEMO -->
-        <div id="authSection">
-            <div id="userInfo" style="display: none; background: #0f1a2e; padding: 15px 20px; border-radius: 10px; border-left: 4px solid #00d2ff; display: none; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-                <div style="color: #e0e0e0; font-size: 14px;">
-                    👤 <span id="userEmail" style="color: #00d2ff;">user@gmail.com</span>
-                    <span id="userRole" style="background: #ffd700; color: #0a0a1a; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 8px;">OWNER</span>
-                </div>
-                <button class="btn btn-danger btn-sm" onclick="logoutUser()">🚪 Logout</button>
-            </div>
-
-            <div id="loginSection" class="login-section" style="display: none;">
-                <h2>🔐 Login untuk Mengakses Memo</h2>
-                <p>Login dengan Google untuk melihat dan mengelola memo</p>
-                <button class="btn btn-google" onclick="loginWithGoogle()">
-                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
-                    Login dengan Google
-                </button>
-                <div id="loginError" class="error-msg" style="display: none;">
-                    ⚠️ <strong>Error:</strong> <span id="errorText">Domain tidak diizinkan</span><br>
-                    <small style="color: #8899aa;">Solusi: Tambahkan domain ini di Firebase Console → Authentication → Settings → Authorized Domains</small>
-                </div>
-            </div>
-        </div>
-
         <!-- Navigation Tabs -->
         <div class="nav-tabs">
             <button class="nav-tab active" data-page="password" onclick="switchPage('password')">
@@ -675,11 +679,11 @@
             </button>
             <button class="nav-tab" data-page="memo" onclick="switchPage('memo')">
                 📝 Memo & Pemberitahuan
-                <span class="badge" id="memoBadge" style="background: #00c853;">●</span>
+                <span class="badge" id="memoBadge">0</span>
             </button>
         </div>
 
-        <!-- Page: Password Generator - TANPA LOGIN -->
+        <!-- Page: Password Generator -->
         <div class="page active" id="page-password">
             <!-- Password Display -->
             <div class="password-section">
@@ -712,7 +716,7 @@
                 <div class="combined-content" id="combinedContent">
                     <span class="line">
                         <span class="label">Used Id : </span>
-                        <span class="value-userid empty" id="userIdDisplay"></span>
+                        <span class="value-userid empty" id="userIdDisplay">(kosong)</span>
                     </span>
                     <span class="line">
                         <span class="label">Password : </span>
@@ -761,41 +765,42 @@
             </div>
         </div>
 
-        <!-- Page: Memo - BUTUH LOGIN -->
+        <!-- Page: Memo -->
         <div class="page" id="page-memo">
-            <div class="memo-section">
-                <div class="memo-header">
-                    <h3>📝 Memo & Pemberitahuan</h3>
-                    <div class="user-info">
-                        <span>Status: <span id="memoStatus" style="color: #ffd700;">Loading...</span></span>
-                    </div>
+            <!-- Admin Login Status -->
+            <div class="admin-login-btn" id="adminStatus">
+                <div class="info">
+                    👤 <span id="adminEmailDisplay">Belum Login Admin</span>
+                    <span id="adminRoleDisplay" style="background: #556677; color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 8px;">VIEWER</span>
                 </div>
-
-                <!-- Editor (hanya untuk owner) -->
-                <div class="memo-editor" id="memoEditor">
-                    <textarea id="memoInput" placeholder="Tulis pemberitahuan atau memo di sini..." disabled></textarea>
-                </div>
-
-                <div class="memo-actions">
-                    <button class="btn btn-success" id="saveMemoBtn" onclick="saveMemo()" style="display: none;">
-                        💾 Simpan Memo
+                <div>
+                    <button class="btn btn-google btn-sm" id="loginAdminBtn" onclick="loginWithGoogle()">
+                        🔑 Login Admin
                     </button>
-                    <button class="btn btn-danger" id="deleteMemoBtn" onclick="deleteMemo()" style="display: none;">
-                        🗑️ Hapus Memo
-                    </button>
-                    <button class="btn btn-copy" onclick="copyMemo()">
-                        📋 Copy Memo
+                    <button class="btn btn-danger btn-sm" id="logoutAdminBtn" onclick="logoutUser()" style="display: none;">
+                        🚪 Logout
                     </button>
                 </div>
+            </div>
 
-                <div style="margin-top: 20px;">
-                    <h4 style="color: #8899aa; font-size: 13px; margin-bottom: 10px;">📄 Isi Memo:</h4>
-                    <div class="memo-display" id="memoDisplay">
-                        <span id="memoText">Memuat memo...</span>
-                        <button class="btn btn-sm btn-copy copy-memo-btn" onclick="copyMemo()" style="position: absolute; top: 10px; right: 10px;">
-                            📋 Copy
-                        </button>
-                    </div>
+            <!-- Admin Panel (Hanya untuk admin) -->
+            <div class="admin-panel" id="adminPanel">
+                <h4>👑 Panel Admin - Tambah Memo Baru</h4>
+                <div class="input-group">
+                    <input type="text" id="memoTitleInput" placeholder="Judul Memo (contoh: CARA DEPOSIT)">
+                    <input type="text" id="memoBodyInput" placeholder="Isi Memo (contoh: Langkah-langkah deposit...)">
+                    <button class="btn btn-success" onclick="addMemo()">➕ Tambah</button>
+                </div>
+                <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()">🗑️ Hapus Semua</button>
+                </div>
+            </div>
+
+            <!-- Memo List -->
+            <div id="memoList" class="memo-container">
+                <div class="empty-memo">
+                    <div class="icon">📭</div>
+                    <p>Belum ada memo. Login sebagai admin untuk menambahkan.</p>
                 </div>
             </div>
         </div>
@@ -823,188 +828,226 @@
         const database = firebase.database();
 
         // ===================== CONSTANTS =====================
-        const OWNER_EMAIL = 'haris789smb@gmail.com';
-        const MEMO_PATH = 'memo/content';
+        const ADMIN_EMAIL = 'haris789smb@gmail.com';
+        const MEMO_PATH = 'memos';
 
         let currentPassword = '';
         let currentUser = null;
-        let isOwner = false;
+        let isAdmin = false;
 
         // ===================== AUTH =====================
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
                 .then((result) => {
-                    showToast('✅ Login berhasil!');
+                    showToast('✅ Login admin berhasil!');
                     document.getElementById('loginError').style.display = 'none';
                 })
                 .catch((error) => {
                     console.error('Login error:', error);
-                    const errorMsg = document.getElementById('errorText');
-                    const errorDiv = document.getElementById('loginError');
-                    
-                    if (error.code === 'auth/unauthorized-domain') {
-                        errorMsg.textContent = 'Domain ini tidak terdaftar di Firebase.';
-                        errorDiv.style.display = 'block';
-                        showToast('❌ Domain tidak diizinkan. Silakan cek Firebase Console.');
-                    } else {
-                        errorMsg.textContent = error.message;
-                        errorDiv.style.display = 'block';
-                        showToast('❌ Login gagal: ' + error.message);
-                    }
+                    showToast('❌ Login gagal: ' + error.message);
                 });
         }
 
         function logoutUser() {
             auth.signOut().then(() => {
                 showToast('✅ Logout berhasil!');
-                // Refresh halaman untuk reset state
                 location.reload();
             });
         }
 
         // ===================== AUTH STATE =====================
         auth.onAuthStateChanged((user) => {
-            const loginSection = document.getElementById('loginSection');
-
             if (user) {
                 currentUser = user;
                 const email = user.email;
-                isOwner = (email === OWNER_EMAIL);
+                isAdmin = (email === ADMIN_EMAIL);
 
-                // Update UI
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('userInfo').style.display = 'flex';
-                document.getElementById('userEmail').textContent = email;
+                // Update UI admin status
+                document.getElementById('adminEmailDisplay').textContent = email;
+                document.getElementById('loginAdminBtn').style.display = 'none';
+                document.getElementById('logoutAdminBtn').style.display = 'inline-flex';
 
-                if (isOwner) {
-                    document.getElementById('userRole').textContent = 'OWNER';
-                    document.getElementById('userRole').style.background = '#ffd700';
-                    document.getElementById('userRole').style.color = '#0a0a1a';
-                    document.getElementById('memoStatus').textContent = '👑 Owner - Bisa Edit & Hapus';
-                    document.getElementById('memoInput').disabled = false;
-                    document.getElementById('saveMemoBtn').style.display = 'inline-flex';
-                    document.getElementById('deleteMemoBtn').style.display = 'inline-flex';
+                if (isAdmin) {
+                    document.getElementById('adminRoleDisplay').textContent = 'ADMIN';
+                    document.getElementById('adminRoleDisplay').style.background = '#ffd700';
+                    document.getElementById('adminRoleDisplay').style.color = '#0a0a1a';
+                    document.getElementById('adminPanel').classList.add('visible');
                 } else {
-                    document.getElementById('userRole').textContent = 'VIEWER';
-                    document.getElementById('userRole').style.background = '#00d2ff';
-                    document.getElementById('userRole').style.color = '#0a0a1a';
-                    document.getElementById('memoStatus').textContent = '👀 Viewer - Hanya Bisa Lihat & Copy';
-                    document.getElementById('memoInput').disabled = true;
-                    document.getElementById('saveMemoBtn').style.display = 'none';
-                    document.getElementById('deleteMemoBtn').style.display = 'none';
+                    document.getElementById('adminRoleDisplay').textContent = 'VIEWER';
+                    document.getElementById('adminRoleDisplay').style.background = '#00d2ff';
+                    document.getElementById('adminRoleDisplay').style.color = '#0a0a1a';
+                    document.getElementById('adminPanel').classList.remove('visible');
                 }
-
-                // Load memo
-                loadMemo();
-                document.getElementById('memoBadge').style.display = 'inline';
             } else {
                 currentUser = null;
-                isOwner = false;
-                document.getElementById('loginSection').style.display = 'block';
-                document.getElementById('userInfo').style.display = 'none';
-                document.getElementById('memoStatus').textContent = '🔒 Belum Login';
-                document.getElementById('memoInput').disabled = true;
-                document.getElementById('saveMemoBtn').style.display = 'none';
-                document.getElementById('deleteMemoBtn').style.display = 'none';
-                document.getElementById('memoText').textContent = 'Silakan login terlebih dahulu untuk melihat memo.';
+                isAdmin = false;
+                document.getElementById('adminEmailDisplay').textContent = 'Belum Login Admin';
+                document.getElementById('adminRoleDisplay').textContent = 'VIEWER';
+                document.getElementById('adminRoleDisplay').style.background = '#556677';
+                document.getElementById('adminRoleDisplay').style.color = '#fff';
+                document.getElementById('loginAdminBtn').style.display = 'inline-flex';
+                document.getElementById('logoutAdminBtn').style.display = 'none';
+                document.getElementById('adminPanel').classList.remove('visible');
             }
+
+            // Load memo (selalu load untuk semua user)
+            loadMemos();
         });
 
         // ===================== MEMO FUNCTIONS =====================
-        function loadMemo() {
+        function loadMemos() {
             const memoRef = database.ref(MEMO_PATH);
             
-            // Set default memo jika belum ada
-            memoRef.once('value', (snapshot) => {
-                if (!snapshot.exists()) {
-                    const defaultMemo = `📢 PEMBERITAHUAN PENTING
-
-1. Untuk reset password, silakan hubungi admin.
-2. Jangan bagikan password kepada siapapun.
-3. Gunakan password yang kuat dan unik.
-
-Terima kasih atas kerjasamanya.`;
-                    memoRef.set(defaultMemo);
-                }
-            });
-
-            // Listen untuk perubahan real-time
             memoRef.on('value', (snapshot) => {
                 const data = snapshot.val();
-                const memoText = document.getElementById('memoText');
-                const input = document.getElementById('memoInput');
-
+                const memoList = document.getElementById('memoList');
+                
                 if (data) {
-                    memoText.textContent = data;
-                    input.value = data;
+                    // Convert object ke array
+                    const memos = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key]
+                    }));
+                    
+                    // Urutkan berdasarkan timestamp (terbaru di atas)
+                    memos.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    
+                    // Render memo
+                    renderMemos(memos);
+                    
+                    // Update badge
+                    document.getElementById('memoBadge').textContent = memos.length;
                 } else {
-                    memoText.textContent = 'Belum ada memo.';
-                    input.value = '';
+                    // Tidak ada memo
+                    memoList.innerHTML = `
+                        <div class="empty-memo">
+                            <div class="icon">📭</div>
+                            <p>Belum ada memo. Login sebagai admin untuk menambahkan.</p>
+                        </div>
+                    `;
+                    document.getElementById('memoBadge').textContent = '0';
                 }
             }, (error) => {
-                console.error('Error loading memo:', error);
-                document.getElementById('memoText').textContent = '❌ Gagal memuat memo: ' + error.message;
+                console.error('Error loading memos:', error);
+                document.getElementById('memoList').innerHTML = `
+                    <div class="empty-memo">
+                        <div class="icon">❌</div>
+                        <p>Gagal memuat memo: ${error.message}</p>
+                    </div>
+                `;
             });
         }
 
-        function saveMemo() {
-            if (!isOwner) {
-                showToast('❌ Hanya owner yang dapat menyimpan memo!');
+        function renderMemos(memos) {
+            const memoList = document.getElementById('memoList');
+            
+            if (memos.length === 0) {
+                memoList.innerHTML = `
+                    <div class="empty-memo">
+                        <div class="icon">📭</div>
+                        <p>Belum ada memo. Login sebagai admin untuk menambahkan.</p>
+                    </div>
+                `;
                 return;
             }
 
-            const content = document.getElementById('memoInput').value.trim();
-            if (!content) {
-                showToast('⚠️ Memo tidak boleh kosong!');
-                return;
-            }
-
-            const memoRef = database.ref(MEMO_PATH);
-            memoRef.set(content)
-                .then(() => {
-                    showToast('✅ Memo berhasil disimpan!');
-                })
-                .catch((error) => {
-                    showToast('❌ Gagal menyimpan memo: ' + error.message);
-                });
+            memoList.innerHTML = memos.map(memo => `
+                <div class="memo-card" data-id="${memo.id}">
+                    <div class="memo-title">📌 ${memo.title || 'Tanpa Judul'}</div>
+                    <div class="memo-body">${memo.body || ''}</div>
+                    <span class="memo-id">ID: ${memo.id.substring(0, 8)}</span>
+                    <div class="memo-actions">
+                        <button class="btn btn-copy btn-sm" onclick="copyMemo('${memo.id}')">📋 Copy</button>
+                        ${isAdmin ? `
+                            <button class="btn btn-danger btn-sm" onclick="deleteMemo('${memo.id}')">🗑️</button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function deleteMemo() {
-            if (!isOwner) {
-                showToast('❌ Hanya owner yang dapat menghapus memo!');
+        // ===================== CRUD MEMO =====================
+        function addMemo() {
+            if (!isAdmin) {
+                showToast('❌ Hanya admin yang dapat menambahkan memo!');
                 return;
             }
 
-            if (!confirm('Yakin ingin menghapus memo?')) return;
+            const title = document.getElementById('memoTitleInput').value.trim();
+            const body = document.getElementById('memoBodyInput').value.trim();
+
+            if (!title || !body) {
+                showToast('⚠️ Judul dan isi memo harus diisi!');
+                return;
+            }
 
             const memoRef = database.ref(MEMO_PATH);
+            const newMemoRef = memoRef.push();
+            
+            newMemoRef.set({
+                title: title,
+                body: body,
+                timestamp: Date.now(),
+                createdBy: currentUser ? currentUser.email : 'admin'
+            }).then(() => {
+                showToast('✅ Memo berhasil ditambahkan!');
+                document.getElementById('memoTitleInput').value = '';
+                document.getElementById('memoBodyInput').value = '';
+            }).catch((error) => {
+                showToast('❌ Gagal menambahkan memo: ' + error.message);
+            });
+        }
+
+        function deleteMemo(memoId) {
+            if (!isAdmin) {
+                showToast('❌ Hanya admin yang dapat menghapus memo!');
+                return;
+            }
+
+            if (!confirm('Yakin ingin menghapus memo ini?')) return;
+
+            const memoRef = database.ref(`${MEMO_PATH}/${memoId}`);
             memoRef.remove()
                 .then(() => {
                     showToast('✅ Memo berhasil dihapus!');
-                    document.getElementById('memoInput').value = '';
-                    document.getElementById('memoText').textContent = 'Memo telah dihapus.';
                 })
                 .catch((error) => {
                     showToast('❌ Gagal menghapus memo: ' + error.message);
                 });
         }
 
-        function copyMemo() {
-            const memoText = document.getElementById('memoText');
-            const text = memoText.textContent;
-
-            if (text === 'Memuat memo...' || text === 'Belum ada memo.' || text === 'Silakan login terlebih dahulu untuk melihat memo.' || text === 'Memo telah dihapus.') {
-                showToast('⚠️ Tidak ada memo untuk disalin');
+        function deleteAllMemo() {
+            if (!isAdmin) {
+                showToast('❌ Hanya admin yang dapat menghapus semua memo!');
                 return;
             }
 
-            if (text.startsWith('❌')) {
-                showToast('⚠️ Tidak ada memo untuk disalin');
+            if (!confirm('Yakin ingin menghapus SEMUA memo?')) return;
+
+            const memoRef = database.ref(MEMO_PATH);
+            memoRef.remove()
+                .then(() => {
+                    showToast('✅ Semua memo berhasil dihapus!');
+                })
+                .catch((error) => {
+                    showToast('❌ Gagal menghapus memo: ' + error.message);
+                });
+        }
+
+        function copyMemo(memoId) {
+            // Ambil teks dari memo card
+            const memoCard = document.querySelector(`.memo-card[data-id="${memoId}"]`);
+            if (!memoCard) {
+                showToast('⚠️ Memo tidak ditemukan');
                 return;
             }
 
-            copyToClipboard(text, '✅ Memo berhasil disalin!');
+            const title = memoCard.querySelector('.memo-title').textContent.replace('📌 ', '');
+            const body = memoCard.querySelector('.memo-body').textContent;
+            const fullText = `📌 ${title}\n\n${body}`;
+
+            copyToClipboard(fullText, '✅ Memo berhasil disalin!');
         }
 
         // ===================== PAGE SWITCH =====================
