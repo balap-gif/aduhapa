@@ -25,16 +25,35 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 210, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(233, 69, 96, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .dashboard {
             background: linear-gradient(145deg, #1a1a2e, #16213e);
             padding: 35px;
-            border-radius: 16px;
-            max-width: 1000px;
+            border-radius: 20px;
+            max-width: 1050px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.8),
+                0 0 80px rgba(0, 210, 255, 0.03),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -47,8 +66,9 @@
         .header h1 {
             color: #fff;
             font-size: 24px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            text-shadow: 0 0 30px rgba(0, 210, 255, 0.15);
         }
 
         .header .subtitle {
@@ -60,9 +80,11 @@
         .header .subtitle a {
             color: #00d2ff;
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         .header .subtitle a:hover {
+            color: #33ddff;
             text-decoration: underline;
         }
 
@@ -79,23 +101,39 @@
         .nav-tab {
             padding: 10px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
             background: #0f1a2e;
             color: #8899aa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-tab:hover::after {
+            left: 100%;
         }
 
         .nav-tab:hover {
             background: #1a2a4a;
             color: #fff;
+            transform: translateY(-1px);
         }
 
         .nav-tab.active {
-            background: #00d2ff;
+            background: linear-gradient(135deg, #00d2ff, #0090cc);
             color: #0a0a1a;
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.25);
         }
 
         .nav-tab .badge {
@@ -105,28 +143,39 @@
             padding: 2px 8px;
             font-size: 11px;
             margin-left: 5px;
+            animation: badgePulse 2s infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* Pages */
-        .page {
-            display: none;
-        }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.35s ease; }
 
-        .page.active {
-            display: block;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* User ID Input */
         .userid-input-section {
             background: #0f1a2e;
             padding: 15px 25px;
-            border-radius: 12px;
+            border-radius: 14px;
             margin-bottom: 20px;
             border: 1px solid rgba(255, 215, 0, 0.15);
             display: flex;
             align-items: center;
             gap: 15px;
             flex-wrap: wrap;
+            transition: border-color 0.3s;
+        }
+
+        .userid-input-section:focus-within {
+            border-color: rgba(255, 215, 0, 0.4);
         }
 
         .userid-input-section label {
@@ -148,10 +197,12 @@
             font-family: 'Courier New', monospace;
             outline: none;
             letter-spacing: 0.5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .userid-input-section input:focus {
             border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
         }
 
         .userid-input-section input::placeholder {
@@ -159,18 +210,21 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .userid-input-section .btn {
-            padding: 10px 20px;
-        }
+        .userid-input-section .btn { padding: 10px 20px; }
 
         /* Password Display */
         .password-section {
             background: #0f1a2e;
             padding: 20px 25px;
-            border-radius: 12px;
+            border-radius: 14px;
             margin-bottom: 20px;
             border: 1px solid rgba(0, 210, 255, 0.15);
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s;
+        }
+
+        .password-section:hover {
+            border-color: rgba(0, 210, 255, 0.3);
         }
 
         .password-label {
@@ -209,12 +263,23 @@
             display: flex;
             align-items: center;
             border: 1px solid rgba(0, 210, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        #passwordDisplay.just-refreshed {
+            animation: passwordFlash 0.6s ease;
+        }
+
+        @keyframes passwordFlash {
+            0% { background: #0a1428; }
+            30% { background: rgba(0, 210, 255, 0.1); }
+            100% { background: #0a1428; }
         }
 
         .btn {
             padding: 10px 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
@@ -225,13 +290,14 @@
             white-space: nowrap;
         }
 
+        .btn:active { transform: scale(0.97) !important; }
+
         .btn-primary {
-            background: #00d2ff;
+            background: linear-gradient(135deg, #00d2ff, #0090cc);
             color: #0a0a1a;
         }
 
         .btn-primary:hover {
-            background: #00b8e6;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
         }
@@ -259,51 +325,47 @@
         }
 
         .btn-refresh {
-            background: #e94560;
+            background: linear-gradient(135deg, #e94560, #c23152);
             color: #fff;
             padding: 12px 28px;
             font-size: 15px;
         }
 
         .btn-refresh:hover {
-            background: #d63851;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.3);
+            box-shadow: 0 6px 25px rgba(233, 69, 96, 0.35);
         }
 
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 12px;
-        }
+        .btn-sm { padding: 6px 14px; font-size: 12px; }
 
         .btn-success {
-            background: #00c853;
+            background: linear-gradient(135deg, #00c853, #009624);
             color: #fff;
         }
 
         .btn-success:hover {
-            background: #00b34a;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.3);
         }
 
         .btn-danger {
-            background: #e94560;
+            background: linear-gradient(135deg, #e94560, #c23152);
             color: #fff;
         }
 
         .btn-danger:hover {
-            background: #d63851;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.3);
         }
 
         .btn-warning {
-            background: #ff9800;
+            background: linear-gradient(135deg, #ff9800, #e68900);
             color: #fff;
         }
 
         .btn-warning:hover {
-            background: #e68900;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
         }
 
         .btn-google {
@@ -320,10 +382,7 @@
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
         }
 
-        .btn-google svg {
-            width: 20px;
-            height: 20px;
-        }
+        .btn-google svg { width: 20px; height: 20px; }
 
         .actions {
             display: flex;
@@ -336,11 +395,14 @@
         .combined-box {
             background: #0f1a2e;
             padding: 20px 25px;
-            border-radius: 12px;
+            border-radius: 14px;
             margin-bottom: 20px;
             border-left: 4px solid #00d2ff;
             position: relative;
+            transition: border-color 0.3s;
         }
+
+        .combined-box:hover { border-left-color: #33ddff; }
 
         .combined-box .copy-all-btn {
             position: absolute;
@@ -356,10 +418,7 @@
             padding-right: 80px;
         }
 
-        .combined-content .label {
-            color: #8899aa;
-            font-weight: 600;
-        }
+        .combined-content .label { color: #8899aa; font-weight: 600; }
 
         .combined-content .value-userid {
             color: #ffd700;
@@ -396,14 +455,9 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .combined-content .note-text strong {
-            color: #ffd700;
-        }
+        .combined-content .note-text strong { color: #ffd700; }
 
-        .combined-content .line {
-            display: block;
-            padding: 2px 0;
-        }
+        .combined-content .line { display: block; padding: 2px 0; }
 
         /* Two Column Layout */
         .two-column {
@@ -416,10 +470,13 @@
         .column-box {
             background: #0f1a2e;
             padding: 20px 25px;
-            border-radius: 12px;
+            border-radius: 14px;
             border-left: 4px solid #ff9800;
             position: relative;
+            transition: all 0.3s;
         }
+
+        .column-box:hover { border-left-color: #ffb74d; transform: translateY(-2px); }
 
         .column-box .copy-btn {
             position: absolute;
@@ -443,10 +500,7 @@
             margin-bottom: 8px;
         }
 
-        .column-content .text-line {
-            display: block;
-            padding: 2px 0;
-        }
+        .column-content .text-line { display: block; padding: 2px 0; }
 
         .column-content .text-line .highlight {
             color: #ffd700;
@@ -462,22 +516,23 @@
 
         /* Admin Panel */
         .admin-panel {
-            background: #0f1a2e;
+            background: linear-gradient(145deg, #0f1a2e, #121f35);
             padding: 20px 25px;
-            border-radius: 12px;
-            border-left: 4px solid #00d2ff;
+            border-radius: 14px;
+            border: 1px solid rgba(0, 210, 255, 0.15);
             margin-bottom: 20px;
             display: none;
+            animation: fadeIn 0.35s ease;
         }
 
-        .admin-panel.visible {
-            display: block;
-        }
+        .admin-panel.visible { display: block; }
 
         .admin-panel h4 {
             color: #00d2ff;
             font-size: 14px;
             margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .admin-panel .input-group {
@@ -486,7 +541,8 @@
             flex-wrap: wrap;
         }
 
-        .admin-panel input {
+        .admin-panel input,
+        .admin-panel textarea {
             flex: 1;
             min-width: 200px;
             padding: 10px 15px;
@@ -496,24 +552,325 @@
             color: #fff;
             font-size: 14px;
             outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .admin-panel input:focus {
+        .admin-panel input:focus,
+        .admin-panel textarea:focus {
             border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
         }
 
-        .admin-panel input::placeholder {
+        .admin-panel input::placeholder,
+        .admin-panel textarea::placeholder { color: #556677; }
+
+        /* ===================== DELAY RESULT PANEL ===================== */
+        .delay-panel {
+            background: linear-gradient(145deg, #1a0f0f, #2a1520);
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid rgba(233, 69, 96, 0.25);
+            margin-bottom: 20px;
+            display: none;
+            animation: fadeIn 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .delay-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .delay-panel.visible { display: block; }
+
+        .delay-panel h4 {
+            color: #e94560;
+            font-size: 15px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delay-panel .delay-field {
+            margin-bottom: 14px;
+        }
+
+        .delay-panel .delay-field label {
+            display: block;
+            color: #8899aa;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .delay-panel .delay-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(233, 69, 96, 0.2);
+            background: #0a0a1a;
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            outline: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .delay-panel .delay-field input:focus {
+            border-color: #e94560;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.15);
+        }
+
+        .delay-panel .delay-field input::placeholder {
+            color: #443344;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        /* Toggle Switch */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        .toggle-row .toggle-label {
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .toggle-row .toggle-label .status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #556677;
+            margin-left: 8px;
+            transition: background 0.3s;
+        }
+
+        .toggle-row .toggle-label .status-dot.active {
+            background: #00c853;
+            box-shadow: 0 0 8px rgba(0, 200, 83, 0.5);
+            animation: dotPulse 1.5s infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { box-shadow: 0 0 8px rgba(0, 200, 83, 0.5); }
+            50% { box-shadow: 0 0 16px rgba(0, 200, 83, 0.8); }
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 52px; height: 28px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+        .toggle-slider {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #2a2a3a;
+            border-radius: 28px;
+            transition: all 0.3s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 22px; height: 22px;
+            left: 3px; bottom: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #00c853, #009624);
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(24px);
+        }
+
+        /* Delay Preview Box */
+        .delay-preview {
+            background: #0a0a1a;
+            border: 1px solid rgba(233, 69, 96, 0.2);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .delay-preview .preview-label {
             color: #556677;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .admin-panel .btn-danger {
-            margin-top: 10px;
+        .delay-preview .preview-label .eye-icon {
+            animation: blink 3s infinite;
+        }
+
+        @keyframes blink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.3; }
+        }
+
+        .delay-preview .preview-text {
+            color: #e0e0e0;
+            font-size: 14px;
+            line-height: 1.9;
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .delay-preview .preview-text .preview-yth {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 15px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .delay-preview .preview-text .preview-pasaran {
+            color: #e94560;
+            font-weight: 700;
+            background: rgba(233, 69, 96, 0.1);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .delay-preview .preview-text .preview-closing {
+            color: #aabbcc;
+            display: block;
+            margin-top: 6px;
+        }
+
+        .delay-preview .copy-preview-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+        }
+
+        /* Delay Notification Card (for public view) */
+        .delay-notification-card {
+            background: linear-gradient(145deg, #1a0f0f, #251520);
+            border-radius: 14px;
+            padding: 22px 25px;
+            border-left: 4px solid #e94560;
+            position: relative;
+            overflow: hidden;
+            animation: delaySlideIn 0.5s ease;
+        }
+
+        @keyframes delaySlideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .delay-notification-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(233, 69, 96, 0.04), transparent 50%);
+            pointer-events: none;
+        }
+
+        .delay-notification-card .delay-icon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(233, 69, 96, 0.15);
+            color: #e94560;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(233, 69, 96, 0.2);
+        }
+
+        .delay-notification-card .delay-icon-badge .pulse-dot {
+            width: 8px; height: 8px;
+            background: #e94560;
+            border-radius: 50%;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(233, 69, 96, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
+        }
+
+        .delay-notification-card .delay-body {
+            color: #e0e0e0;
+            font-size: 14px;
+            line-height: 1.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .delay-notification-card .delay-body .delay-yth {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .delay-notification-card .delay-body .delay-pasaran-name {
+            color: #e94560;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .delay-notification-card .delay-body .delay-closing {
+            color: #aabbcc;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .delay-notification-card .delay-copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
         }
 
         /* Memo Card */
         .memo-card {
             background: #0f1a2e;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 18px 20px;
             border-left: 3px solid #ffd700;
             position: relative;
@@ -522,6 +879,7 @@
 
         .memo-card:hover {
             background: #141f33;
+            border-left-color: #ffe44d;
         }
 
         .memo-card .memo-title {
@@ -549,10 +907,7 @@
             gap: 6px;
         }
 
-        .memo-card .memo-actions .btn {
-            padding: 4px 10px;
-            font-size: 11px;
-        }
+        .memo-card .memo-actions .btn { padding: 4px 10px; font-size: 11px; }
 
         .memo-card .memo-id {
             color: #556677;
@@ -568,16 +923,13 @@
             color: #556677;
         }
 
-        .empty-memo .icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
+        .empty-memo .icon { font-size: 48px; margin-bottom: 10px; }
 
         /* Admin Login Status */
         .admin-login-btn {
             background: #0f1a2e;
             padding: 12px 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             border-left: 4px solid #ffd700;
             margin-bottom: 20px;
             display: flex;
@@ -587,17 +939,15 @@
             gap: 10px;
         }
 
-        .admin-login-btn .info {
-            color: #8899aa;
-            font-size: 13px;
-        }
+        .admin-login-btn .info { color: #8899aa; font-size: 13px; }
+        .admin-login-btn .info strong { color: #ffd700; }
+        .admin-login-btn .user-email { color: #00d2ff; }
 
-        .admin-login-btn .info strong {
-            color: #ffd700;
-        }
-
-        .admin-login-btn .user-email {
-            color: #00d2ff;
+        /* Section Divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin: 20px 0;
         }
 
         /* Toast */
@@ -606,10 +956,10 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #1a2a4a;
+            background: linear-gradient(145deg, #1a2a4a, #16213e);
             color: #fff;
             padding: 14px 30px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 15px;
             border: 1px solid rgba(0, 210, 255, 0.2);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
@@ -627,13 +977,9 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
+            .two-column { grid-template-columns: 1fr; }
 
-            .dashboard {
-                padding: 20px;
-            }
+            .dashboard { padding: 20px; }
 
             .password-display {
                 flex-direction: column;
@@ -648,10 +994,7 @@
                 padding: 12px;
             }
 
-            .combined-content {
-                padding-right: 0;
-                font-size: 14px;
-            }
+            .combined-content { padding-right: 0; font-size: 14px; }
 
             .combined-box .copy-all-btn {
                 position: static;
@@ -660,9 +1003,7 @@
                 justify-content: flex-end;
             }
 
-            .column-content {
-                padding-right: 0;
-            }
+            .column-content { padding-right: 0; }
 
             .column-box .copy-btn {
                 position: static;
@@ -671,29 +1012,13 @@
                 justify-content: flex-end;
             }
 
-            .actions {
-                flex-direction: column;
-            }
+            .actions { flex-direction: column; }
+            .btn { justify-content: center; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tab { text-align: center; }
 
-            .btn {
-                justify-content: center;
-            }
-
-            .nav-tabs {
-                flex-direction: column;
-            }
-
-            .nav-tab {
-                text-align: center;
-            }
-
-            .memo-card .memo-title {
-                padding-right: 0;
-            }
-
-            .memo-card .memo-body {
-                padding-right: 0;
-            }
+            .memo-card .memo-title { padding-right: 0; }
+            .memo-card .memo-body { padding-right: 0; }
 
             .memo-card .memo-actions {
                 position: static;
@@ -701,18 +1026,13 @@
                 justify-content: flex-end;
             }
 
-            .admin-panel .input-group {
-                flex-direction: column;
-            }
-
+            .admin-panel .input-group { flex-direction: column; }
             .admin-panel .input-group .btn {
                 width: 100%;
                 justify-content: center;
             }
 
-            .admin-panel textarea {
-                min-width: unset !important;
-            }
+            .admin-panel textarea { min-width: unset !important; }
 
             .userid-input-section {
                 flex-direction: column;
@@ -722,6 +1042,28 @@
             .userid-input-section .btn {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .delay-notification-card .delay-copy-btn {
+                position: static;
+                margin-top: 12px;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .delay-notification-card .delay-body {
+                padding-right: 0;
+            }
+
+            .delay-preview .copy-preview-btn {
+                position: static;
+                margin-top: 10px;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .delay-preview .preview-text {
+                padding-right: 0;
             }
         }
     </style>
@@ -853,7 +1195,48 @@
                 </div>
             </div>
 
-            <!-- Admin Panel -->
+            <!-- Delay Result Panel (Admin Only) -->
+            <div class="delay-panel" id="delayPanel">
+                <h4>⚠️ Panel Keterlambatan Result</h4>
+
+                <div class="delay-field">
+                    <label>Nama Pasaran</label>
+                    <input type="text" id="delayPasaranInput" placeholder="Contoh: BULLSEYE, HONGKONG, SYDNEY..." oninput="updateDelayPreview()">
+                </div>
+
+                <div class="toggle-row">
+                    <span class="toggle-label">
+                        Tampilkan Notifikasi
+                        <span class="status-dot" id="delayStatusDot"></span>
+                    </span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="delayToggle" onchange="toggleDelayNotification()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Preview -->
+                <div class="delay-preview" id="delayPreviewBox">
+                    <div class="preview-label">
+                        <span class="eye-icon">👁️</span> Preview Pesan
+                    </div>
+                    <div class="preview-text" id="delayPreviewText">
+                        <span class="preview-yth">Yth. Member Setia Hokbentoto</span>
+                        Kami ingin menginformasikan bahwa untuk Pasaran <span class="preview-pasaran" id="delayPreviewPasaran">BULLSEYE</span> saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.
+                        Mohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan,<span class="preview-closing"> Terima kasih.</span>
+                    </div>
+                    <div class="copy-preview-btn">
+                        <button class="btn btn-copy btn-sm" onclick="copyDelayMessage()">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-success" onclick="saveDelayConfig()">💾 Simpan Pengaturan</button>
+                    <button class="btn btn-danger btn-sm" onclick="disableDelayConfig()">🗑️ Nonaktifkan</button>
+                </div>
+            </div>
+
+            <!-- Admin Panel: Memo -->
             <div class="admin-panel" id="adminPanel">
                 <h4>👑 Panel Admin - Tambah Memo Baru</h4>
                 <div class="input-group">
@@ -861,8 +1244,14 @@
                     <textarea id="memoBodyInput" placeholder="Isi Memo (contoh: mohon maaf bosku...)" style="flex:2; min-width:300px; padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:#0a1428; color:#fff; font-size:14px; outline:none; resize:vertical; min-height:80px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;"></textarea>
                     <button class="btn btn-success" onclick="addMemo()" style="align-self:flex-start;">➕ Tambah</button>
                 </div>
-                <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()" style="margin-top:10px;">🗑️ Hapus Semua</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()" style="margin-top:10px;">🗑️ Hapus Semua Memo</button>
             </div>
+
+            <!-- Delay Notification Display (Public) -->
+            <div id="delayNotificationArea"></div>
+
+            <!-- Section Divider -->
+            <div class="section-divider" id="delayDivider" style="display:none;"></div>
 
             <!-- Memo List -->
             <div id="memoList" class="memo-container">
@@ -879,14 +1268,14 @@
 
     <script>
         // ===================== FIREBASE CONFIG =====================
-       const firebaseConfig = {
-  apiKey: "AIzaSyD9cp_BeXbBE6li9A4iyplxzaSMSqrlfrY",
-  authDomain: "ganyang-bf952.firebaseapp.com",
-  databaseURL: "https://ganyang-bf952-default-rtdb.firebaseio.com",
-  projectId: "ganyang-bf952",
-  storageBucket: "ganyang-bf952.firebasestorage.app",
-  messagingSenderId: "387233630892",
-  appId: "1:387233630892:web:ab39554507ff926c956d09"
+        const firebaseConfig = {
+            apiKey: "AIzaSyD9cp_BeXbBE6li9A4iyplxzaSMSqrlfrY",
+            authDomain: "ganyang-bf952.firebaseapp.com",
+            databaseURL: "https://ganyang-bf952-default-rtdb.firebaseio.com",
+            projectId: "ganyang-bf952",
+            storageBucket: "ganyang-bf952.firebasestorage.app",
+            messagingSenderId: "387233630892",
+            appId: "1:387233630892:web:ab39554507ff926c956d09"
         };
 
         firebase.initializeApp(firebaseConfig);
@@ -896,10 +1285,12 @@
         // ===================== CONSTANTS =====================
         const ADMIN_EMAIL = 'haris789smb@gmail.com';
         const MEMO_PATH = 'memos';
+        const DELAY_PATH = 'delayConfig';
 
         let currentPassword = '';
         let currentUser = null;
         let isAdmin = false;
+        let currentDelayConfig = { enabled: false, pasaran: '' };
 
         // ===================== USER ID FUNCTIONS =====================
         function updateUserId() {
@@ -926,12 +1317,8 @@
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
-                .then(() => {
-                    showToast('✅ Login admin berhasil!');
-                })
-                .catch((error) => {
-                    showToast('❌ Login gagal: ' + error.message);
-                });
+                .then(() => showToast('✅ Login admin berhasil!'))
+                .catch((error) => showToast('❌ Login gagal: ' + error.message));
         }
 
         function logoutUser() {
@@ -957,11 +1344,13 @@
                     document.getElementById('adminRoleDisplay').style.background = '#ffd700';
                     document.getElementById('adminRoleDisplay').style.color = '#0a0a1a';
                     document.getElementById('adminPanel').classList.add('visible');
+                    document.getElementById('delayPanel').classList.add('visible');
                 } else {
                     document.getElementById('adminRoleDisplay').textContent = 'VIEWER';
                     document.getElementById('adminRoleDisplay').style.background = '#00d2ff';
                     document.getElementById('adminRoleDisplay').style.color = '#0a0a1a';
                     document.getElementById('adminPanel').classList.remove('visible');
+                    document.getElementById('delayPanel').classList.remove('visible');
                 }
             } else {
                 currentUser = null;
@@ -973,10 +1362,154 @@
                 document.getElementById('loginAdminBtn').style.display = 'inline-flex';
                 document.getElementById('logoutAdminBtn').style.display = 'none';
                 document.getElementById('adminPanel').classList.remove('visible');
+                document.getElementById('delayPanel').classList.remove('visible');
             }
 
             loadMemos();
+            loadDelayConfig();
         });
+
+        // ===================== DELAY RESULT FUNCTIONS =====================
+        function loadDelayConfig() {
+            const delayRef = database.ref(DELAY_PATH);
+            delayRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    currentDelayConfig = {
+                        enabled: data.enabled || false,
+                        pasaran: data.pasaran || ''
+                    };
+                } else {
+                    currentDelayConfig = { enabled: false, pasaran: '' };
+                }
+
+                // Update admin panel fields
+                if (isAdmin) {
+                    document.getElementById('delayPasaranInput').value = currentDelayConfig.pasaran;
+                    document.getElementById('delayToggle').checked = currentDelayConfig.enabled;
+                    updateDelayStatusDot();
+                    updateDelayPreview();
+                }
+
+                // Render public notification
+                renderDelayNotification();
+            }, (error) => {
+                console.error('Gagal memuat delay config:', error);
+            });
+        }
+
+        function updateDelayPreview() {
+            const pasaran = document.getElementById('delayPasaranInput').value.trim() || '...';
+            document.getElementById('delayPreviewPasaran').textContent = pasaran.toUpperCase();
+        }
+
+        function updateDelayStatusDot() {
+            const dot = document.getElementById('delayStatusDot');
+            const isOn = document.getElementById('delayToggle').checked;
+            if (isOn) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        }
+
+        function toggleDelayNotification() {
+            updateDelayStatusDot();
+        }
+
+        function saveDelayConfig() {
+            if (!isAdmin) {
+                showToast('❌ Hanya admin yang dapat menyimpan pengaturan!');
+                return;
+            }
+
+            const pasaran = document.getElementById('delayPasaranInput').value.trim();
+            const enabled = document.getElementById('delayToggle').checked;
+
+            if (enabled && !pasaran) {
+                showToast('⚠️ Nama pasaran harus diisi jika notifikasi diaktifkan!');
+                return;
+            }
+
+            const delayRef = database.ref(DELAY_PATH);
+            delayRef.set({
+                enabled: enabled,
+                pasaran: pasaran.toUpperCase(),
+                updatedAt: Date.now(),
+                updatedBy: currentUser ? currentUser.email : 'admin'
+            }).then(() => {
+                showToast('✅ Pengaturan keterlambatan result berhasil disimpan!');
+            }).catch((error) => {
+                showToast('❌ Gagal menyimpan: ' + error.message);
+            });
+        }
+
+        function disableDelayConfig() {
+            if (!isAdmin) return;
+
+            const delayRef = database.ref(DELAY_PATH);
+            delayRef.set({
+                enabled: false,
+                pasaran: '',
+                updatedAt: Date.now(),
+                updatedBy: currentUser ? currentUser.email : 'admin'
+            }).then(() => {
+                document.getElementById('delayPasaranInput').value = '';
+                document.getElementById('delayToggle').checked = false;
+                updateDelayStatusDot();
+                updateDelayPreview();
+                showToast('✅ Notifikasi keterlambatan berhasil dinonaktifkan!');
+            }).catch((error) => {
+                showToast('❌ Gagal menonaktifkan: ' + error.message);
+            });
+        }
+
+        function renderDelayNotification() {
+            const area = document.getElementById('delayNotificationArea');
+            const divider = document.getElementById('delayDivider');
+
+            if (currentDelayConfig.enabled && currentDelayConfig.pasaran) {
+                const pasaranName = escapeHtml(currentDelayConfig.pasaran);
+                const fullText = `Yth. Member Setia Hokbentoto\nKami ingin menginformasikan bahwa untuk Pasaran ${pasaranName} saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.\nMohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.`;
+
+                area.innerHTML = `
+                    <div class="delay-notification-card" data-delay-text="${escapeHtml(fullText)}">
+                        <div class="delay-icon-badge">
+                            <span class="pulse-dot"></span>
+                            Keterlambatan Result
+                        </div>
+                        <div class="delay-body">
+                            <span class="delay-yth">Yth. Member Setia Hokbentoto</span>
+                            Kami ingin menginformasikan bahwa untuk Pasaran <span class="delay-pasaran-name">${pasaranName}</span> saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.
+                            <span class="delay-closing">Mohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.</span>
+                        </div>
+                        <div class="delay-copy-btn">
+                            <button class="btn btn-copy btn-sm" onclick="copyDelayNotification()">📋 Copy</button>
+                        </div>
+                    </div>
+                `;
+                divider.style.display = 'block';
+            } else {
+                area.innerHTML = '';
+                divider.style.display = 'none';
+            }
+        }
+
+        function copyDelayNotification() {
+            const card = document.querySelector('.delay-notification-card');
+            if (!card) {
+                showToast('⚠️ Tidak ada notifikasi untuk disalin');
+                return;
+            }
+            const text = card.dataset.delayText || '';
+            copyToClipboard(text, '✅ Pesan keterlambatan berhasil disalin!');
+        }
+
+        function copyDelayMessage() {
+            const pasaran = document.getElementById('delayPasaranInput').value.trim() || '...';
+            const text = `Yth. Member Setia Hokbentoto\nKami ingin menginformasikan bahwa untuk Pasaran ${pasaran.toUpperCase()} saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.\nMohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.`;
+            copyToClipboard(text, '✅ Pesan keterlambatan berhasil disalin!');
+        }
 
         // ===================== MEMO FUNCTIONS =====================
         function loadMemos() {
@@ -1094,12 +1627,8 @@
 
             const memoRef = database.ref(`${MEMO_PATH}/${memoId}`);
             memoRef.remove()
-                .then(() => {
-                    showToast('✅ Memo berhasil dihapus!');
-                })
-                .catch((error) => {
-                    showToast('❌ Gagal menghapus memo: ' + error.message);
-                });
+                .then(() => showToast('✅ Memo berhasil dihapus!'))
+                .catch((error) => showToast('❌ Gagal menghapus memo: ' + error.message));
         }
 
         function deleteAllMemo() {
@@ -1112,12 +1641,8 @@
 
             const memoRef = database.ref(MEMO_PATH);
             memoRef.remove()
-                .then(() => {
-                    showToast('✅ Semua memo berhasil dihapus!');
-                })
-                .catch((error) => {
-                    showToast('❌ Gagal menghapus memo: ' + error.message);
-                });
+                .then(() => showToast('✅ Semua memo berhasil dihapus!'))
+                .catch((error) => showToast('❌ Gagal menghapus memo: ' + error.message));
         }
 
         function copyMemo(memoId) {
@@ -1144,9 +1669,7 @@
 
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
-                if (tab.dataset.page === page) {
-                    tab.classList.add('active');
-                }
+                if (tab.dataset.page === page) tab.classList.add('active');
             });
         }
 
@@ -1173,16 +1696,23 @@
 
         function refreshPassword() {
             currentPassword = generatePassword(9);
-            document.getElementById('passwordDisplay').textContent = currentPassword;
-            document.getElementById('passwordDisplay3').textContent = currentPassword;
+            const pwdDisplay = document.getElementById('passwordDisplay');
+            const pwdDisplay3 = document.getElementById('passwordDisplay3');
+            
+            pwdDisplay.textContent = currentPassword;
+            pwdDisplay3.textContent = currentPassword;
+
+            // Flash animation
+            pwdDisplay.classList.remove('just-refreshed');
+            void pwdDisplay.offsetWidth; // reflow trigger
+            pwdDisplay.classList.add('just-refreshed');
+
             showToast('🔄 Password berhasil di-refresh!');
         }
 
         // ===================== COPY FUNCTIONS =====================
         function copyPasswordOnly() {
-            if (!currentPassword) {
-                refreshPassword();
-            }
+            if (!currentPassword) refreshPassword();
             copyToClipboard(currentPassword, '✅ Password berhasil disalin!');
         }
 
@@ -1199,24 +1729,12 @@
         }
 
         function copyColumnLeft() {
-            // Ambil User ID yang sedang aktif
-            const userId = document.getElementById('userIdDisplay').textContent;
-            const userIdText = userId === '' ? '' : userId;
-            
-            const text = `Mohon lengkapi data yang terdaftar ;
-- atas nama rekening (wajib) ;
-- no rekening (wajib) ;
-
-Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
+            const text = `Mohon lengkapi data yang terdaftar ;\n- atas nama rekening (wajib) ;\n- no rekening (wajib) ;\n\nAkan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
             copyToClipboard(text, '✅ Teks kolom kiri berhasil disalin!');
         }
 
         function copyColumnRight() {
-            const text = `Mohon lengkapi data yang terdaftar, akan kami bantu reset password ;
-- atas nama rekening (wajib) ;
-- no rekening (wajib) ;
-
-Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
+            const text = `Mohon lengkapi data yang terdaftar, akan kami bantu reset password ;\n- atas nama rekening (wajib) ;\n- no rekening (wajib) ;\n\nAkan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
             copyToClipboard(text, '✅ Teks kolom kanan berhasil disalin!');
         }
 
@@ -1229,12 +1747,8 @@ Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text)
-                    .then(() => {
-                        showToast(successMsg);
-                    })
-                    .catch(() => {
-                        fallbackCopy(text, successMsg);
-                    });
+                    .then(() => showToast(successMsg))
+                    .catch(() => fallbackCopy(text, successMsg));
             } else {
                 fallbackCopy(text, successMsg);
             }
@@ -1271,9 +1785,7 @@ Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
             toast.classList.add('show');
 
             clearTimeout(toast._timer);
-            toast._timer = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
         // ===================== INIT =====================
@@ -1281,14 +1793,13 @@ Akan kami bantu pengecekannya terlebih dahulu. Terima kasih`;
             currentPassword = generatePassword(9);
             document.getElementById('passwordDisplay').textContent = currentPassword;
             document.getElementById('passwordDisplay3').textContent = currentPassword;
-            
-            // Set default User ID
             updateUserId();
         })();
     </script>
 
 </body>
 </html>
+
 <script>
 document.addEventListener('contextmenu', e => e.preventDefault());
 
