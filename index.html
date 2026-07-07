@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background Particles */
         body::before {
             content: '';
             position: fixed;
@@ -88,7 +87,6 @@
             text-decoration: underline;
         }
 
-        /* Navigation Tabs */
         .nav-tabs {
             display: flex;
             gap: 10px;
@@ -120,9 +118,7 @@
             transition: left 0.5s;
         }
 
-        .nav-tab:hover::after {
-            left: 100%;
-        }
+        .nav-tab:hover::after { left: 100%; }
 
         .nav-tab:hover {
             background: #1a2a4a;
@@ -151,7 +147,6 @@
             50% { opacity: 0.7; }
         }
 
-        /* Pages */
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.35s ease; }
 
@@ -160,7 +155,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* User ID Input */
         .userid-input-section {
             background: #0f1a2e;
             padding: 15px 25px;
@@ -174,9 +168,7 @@
             transition: border-color 0.3s;
         }
 
-        .userid-input-section:focus-within {
-            border-color: rgba(255, 215, 0, 0.4);
-        }
+        .userid-input-section:focus-within { border-color: rgba(255, 215, 0, 0.4); }
 
         .userid-input-section label {
             color: #8899aa;
@@ -212,7 +204,6 @@
 
         .userid-input-section .btn { padding: 10px 20px; }
 
-        /* Password Display */
         .password-section {
             background: #0f1a2e;
             padding: 20px 25px;
@@ -223,9 +214,7 @@
             transition: border-color 0.3s;
         }
 
-        .password-section:hover {
-            border-color: rgba(0, 210, 255, 0.3);
-        }
+        .password-section:hover { border-color: rgba(0, 210, 255, 0.3); }
 
         .password-label {
             display: flex;
@@ -266,9 +255,7 @@
             transition: all 0.3s;
         }
 
-        #passwordDisplay.just-refreshed {
-            animation: passwordFlash 0.6s ease;
-        }
+        #passwordDisplay.just-refreshed { animation: passwordFlash 0.6s ease; }
 
         @keyframes passwordFlash {
             0% { background: #0a1428; }
@@ -391,7 +378,6 @@
             margin-bottom: 25px;
         }
 
-        /* Combined Box */
         .combined-box {
             background: #0f1a2e;
             padding: 20px 25px;
@@ -456,10 +442,8 @@
         }
 
         .combined-content .note-text strong { color: #ffd700; }
-
         .combined-content .line { display: block; padding: 2px 0; }
 
-        /* Two Column Layout */
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -507,14 +491,12 @@
             font-weight: 600;
         }
 
-        /* ===================== MEMO STYLE ===================== */
         .memo-container {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        /* Admin Panel */
         .admin-panel {
             background: linear-gradient(145deg, #0f1a2e, #121f35);
             padding: 20px 25px;
@@ -566,32 +548,21 @@
 
         /* ===================== DELAY RESULT PANEL ===================== */
         .delay-panel {
-            background: linear-gradient(145deg, #1a0f0f, #2a1520);
+            background: linear-gradient(145deg, #0f1a2e, #121f35);
             padding: 25px;
             border-radius: 14px;
-            border: 1px solid rgba(233, 69, 96, 0.25);
+            border: 1px solid rgba(0, 210, 255, 0.15);
             margin-bottom: 20px;
             display: none;
             animation: fadeIn 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .delay-panel::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 120px; height: 120px;
-            background: radial-gradient(circle, rgba(233, 69, 96, 0.08), transparent 70%);
-            pointer-events: none;
         }
 
         .delay-panel.visible { display: block; }
 
         .delay-panel h4 {
-            color: #e94560;
+            color: #00d2ff;
             font-size: 15px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             text-transform: uppercase;
             letter-spacing: 1px;
             display: flex;
@@ -599,9 +570,7 @@
             gap: 8px;
         }
 
-        .delay-panel .delay-field {
-            margin-bottom: 14px;
-        }
+        .delay-panel .delay-field { margin-bottom: 16px; }
 
         .delay-panel .delay-field label {
             display: block;
@@ -617,7 +586,7 @@
             width: 100%;
             padding: 12px 16px;
             border-radius: 10px;
-            border: 1px solid rgba(233, 69, 96, 0.2);
+            border: 1px solid rgba(0, 210, 255, 0.2);
             background: #0a0a1a;
             color: #ffd700;
             font-size: 16px;
@@ -630,33 +599,35 @@
         }
 
         .delay-panel .delay-field input:focus {
-            border-color: #e94560;
-            box-shadow: 0 0 20px rgba(233, 69, 96, 0.15);
+            border-color: #00d2ff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
         }
 
         .delay-panel .delay-field input::placeholder {
-            color: #443344;
+            color: #443355;
             font-family: 'Segoe UI', sans-serif;
             font-weight: 400;
             text-transform: none;
         }
 
-        /* Toggle Switch */
         .toggle-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            margin-bottom: 18px;
             padding: 12px 16px;
             background: rgba(0,0,0,0.3);
             border-radius: 10px;
+            margin-bottom: 12px;
         }
 
         .toggle-row .toggle-label {
             color: #ccc;
             font-size: 14px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .toggle-row .toggle-label .status-dot {
@@ -664,8 +635,7 @@
             width: 8px; height: 8px;
             border-radius: 50%;
             background: #556677;
-            margin-left: 8px;
-            transition: background 0.3s;
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .toggle-row .toggle-label .status-dot.active {
@@ -674,15 +644,27 @@
             animation: dotPulse 1.5s infinite;
         }
 
+        .toggle-row .toggle-label .status-dot.active-red {
+            background: #e94560;
+            box-shadow: 0 0 8px rgba(233, 69, 96, 0.5);
+            animation: dotPulseRed 1.5s infinite;
+        }
+
         @keyframes dotPulse {
             0%, 100% { box-shadow: 0 0 8px rgba(0, 200, 83, 0.5); }
             50% { box-shadow: 0 0 16px rgba(0, 200, 83, 0.8); }
+        }
+
+        @keyframes dotPulseRed {
+            0%, 100% { box-shadow: 0 0 8px rgba(233, 69, 96, 0.5); }
+            50% { box-shadow: 0 0 16px rgba(233, 69, 96, 0.8); }
         }
 
         .toggle-switch {
             position: relative;
             width: 52px; height: 28px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .toggle-switch input { opacity: 0; width: 0; height: 0; }
@@ -706,6 +688,10 @@
         }
 
         .toggle-switch input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #e94560, #c23152);
+        }
+
+        .toggle-switch input:checked + .toggle-slider.green {
             background: linear-gradient(135deg, #00c853, #009624);
         }
 
@@ -713,15 +699,40 @@
             transform: translateX(24px);
         }
 
-        /* Delay Preview Box */
+        /* Sub-section divider inside delay panel */
+        .delay-sub-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin: 18px 0;
+        }
+
+        .delay-sub-title {
+            color: #8899aa;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delay-sub-title .sub-icon-red { color: #e94560; }
+        .delay-sub-title .sub-icon-green { color: #00c853; }
+
+        /* Preview Box */
         .delay-preview {
             background: #0a0a1a;
-            border: 1px solid rgba(233, 69, 96, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
             padding: 18px 20px;
-            margin-top: 16px;
+            margin-top: 14px;
             position: relative;
         }
+
+        .delay-preview.preview-delay { border-color: rgba(233, 69, 96, 0.2); }
+        .delay-preview.preview-resolved { border-color: rgba(0, 200, 83, 0.2); }
 
         .delay-preview .preview-label {
             color: #556677;
@@ -734,9 +745,7 @@
             gap: 6px;
         }
 
-        .delay-preview .preview-label .eye-icon {
-            animation: blink 3s infinite;
-        }
+        .delay-preview .preview-label .eye-icon { animation: blink 3s infinite; }
 
         @keyframes blink {
             0%, 90%, 100% { opacity: 1; }
@@ -767,6 +776,14 @@
             border-radius: 4px;
         }
 
+        .delay-preview .preview-text .preview-pasaran-green {
+            color: #00c853;
+            font-weight: 700;
+            background: rgba(0, 200, 83, 0.1);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
         .delay-preview .preview-text .preview-closing {
             color: #aabbcc;
             display: block;
@@ -779,15 +796,23 @@
             right: 12px;
         }
 
-        /* Delay Notification Card (for public view) */
+        /* Notification Cards (public view) */
         .delay-notification-card {
-            background: linear-gradient(145deg, #1a0f0f, #251520);
             border-radius: 14px;
             padding: 22px 25px;
-            border-left: 4px solid #e94560;
             position: relative;
             overflow: hidden;
             animation: delaySlideIn 0.5s ease;
+        }
+
+        .delay-notification-card.card-delay {
+            background: linear-gradient(145deg, #1a0f0f, #251520);
+            border-left: 4px solid #e94560;
+        }
+
+        .delay-notification-card.card-resolved {
+            background: linear-gradient(145deg, #0f1a10, #152518);
+            border-left: 4px solid #00c853;
         }
 
         @keyframes delaySlideIn {
@@ -800,16 +825,21 @@
             position: absolute;
             top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(233, 69, 96, 0.04), transparent 50%);
             pointer-events: none;
+        }
+
+        .delay-notification-card.card-delay::before {
+            background: radial-gradient(circle at 30% 30%, rgba(233, 69, 96, 0.04), transparent 50%);
+        }
+
+        .delay-notification-card.card-resolved::before {
+            background: radial-gradient(circle at 30% 30%, rgba(0, 200, 83, 0.04), transparent 50%);
         }
 
         .delay-notification-card .delay-icon-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(233, 69, 96, 0.15);
-            color: #e94560;
             padding: 5px 14px;
             border-radius: 20px;
             font-size: 12px;
@@ -817,20 +847,45 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 14px;
+        }
+
+        .card-delay .delay-icon-badge {
+            background: rgba(233, 69, 96, 0.15);
+            color: #e94560;
             border: 1px solid rgba(233, 69, 96, 0.2);
+        }
+
+        .card-resolved .delay-icon-badge {
+            background: rgba(0, 200, 83, 0.15);
+            color: #00c853;
+            border: 1px solid rgba(0, 200, 83, 0.2);
         }
 
         .delay-notification-card .delay-icon-badge .pulse-dot {
             width: 8px; height: 8px;
-            background: #e94560;
             border-radius: 50%;
-            animation: pulseDot 1.5s infinite;
         }
 
-        @keyframes pulseDot {
+        .card-delay .delay-icon-badge .pulse-dot {
+            background: #e94560;
+            animation: pulseDotRed 1.5s infinite;
+        }
+
+        .card-resolved .delay-icon-badge .pulse-dot {
+            background: #00c853;
+            animation: pulseDotGreen 1.5s infinite;
+        }
+
+        @keyframes pulseDotRed {
             0% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.5); }
             70% { box-shadow: 0 0 0 8px rgba(233, 69, 96, 0); }
             100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
+        }
+
+        @keyframes pulseDotGreen {
+            0% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(0, 200, 83, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
         }
 
         .delay-notification-card .delay-body {
@@ -849,8 +904,14 @@
             margin-bottom: 8px;
         }
 
-        .delay-notification-card .delay-body .delay-pasaran-name {
+        .card-delay .delay-body .delay-pasaran-name {
             color: #e94560;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .card-resolved .delay-body .delay-pasaran-name {
+            color: #00c853;
             font-weight: 700;
             font-size: 15px;
         }
@@ -867,7 +928,6 @@
             right: 15px;
         }
 
-        /* Memo Card */
         .memo-card {
             background: #0f1a2e;
             border-radius: 12px;
@@ -916,7 +976,6 @@
             display: block;
         }
 
-        /* Empty State */
         .empty-memo {
             text-align: center;
             padding: 40px 20px;
@@ -925,7 +984,6 @@
 
         .empty-memo .icon { font-size: 48px; margin-bottom: 10px; }
 
-        /* Admin Login Status */
         .admin-login-btn {
             background: #0f1a2e;
             padding: 12px 20px;
@@ -943,14 +1001,12 @@
         .admin-login-btn .info strong { color: #ffd700; }
         .admin-login-btn .user-email { color: #00d2ff; }
 
-        /* Section Divider */
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
             margin: 20px 0;
         }
 
-        /* Toast */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -975,16 +1031,11 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .two-column { grid-template-columns: 1fr; }
-
             .dashboard { padding: 20px; }
 
-            .password-display {
-                flex-direction: column;
-                align-items: stretch;
-            }
+            .password-display { flex-direction: column; align-items: stretch; }
 
             #passwordDisplay {
                 font-size: 20px;
@@ -1051,9 +1102,7 @@
                 justify-content: flex-end;
             }
 
-            .delay-notification-card .delay-body {
-                padding-right: 0;
-            }
+            .delay-notification-card .delay-body { padding-right: 0; }
 
             .delay-preview .copy-preview-btn {
                 position: static;
@@ -1062,44 +1111,38 @@
                 justify-content: flex-end;
             }
 
-            .delay-preview .preview-text {
-                padding-right: 0;
-            }
+            .delay-preview .preview-text { padding-right: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="dashboard" id="app">
-        <!-- Header -->
         <div class="header">
-            <h1>🔐 Dashboard Password Generator</h1>
+            <h1> Dashboard Riset Password </h1>
             <div class="subtitle">
                 Sumber: <a href="https://us.norton.com/feature/password-generator" target="_blank">Norton Password Generator</a>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
         <div class="nav-tabs">
             <button class="nav-tab active" data-page="password" onclick="switchPage('password')">
-                🔑 Riset Password
+                 Riset Password
             </button>
             <button class="nav-tab" data-page="memo" onclick="switchPage('memo')">
-                📝 Memo & Pemberitahuan
+                 Memo & Pemberitahuan
                 <span class="badge" id="memoBadge">0</span>
             </button>
         </div>
 
         <!-- Page: Password Generator -->
         <div class="page active" id="page-password">
-            <!-- User ID Input Section -->
             <div class="userid-input-section">
                 <label>🆔 User ID</label>
                 <input type="text" id="userIdInput" placeholder="Masukkan atau tempel User ID di sini..." oninput="updateUserId()">
                 <button class="btn btn-secondary btn-sm" onclick="clearUserId()">✖ Clear</button>
             </div>
 
-            <!-- Password Display -->
             <div class="password-section">
                 <div class="password-label">
                     <span>🔑 Password (9 Karakter)</span>
@@ -1107,25 +1150,17 @@
                 </div>
                 <div class="password-display">
                     <div id="passwordDisplay">!NH)Ge83k</div>
-                    <button class="btn btn-copy" onclick="copyPasswordOnly()">
-                        📋 Copy
-                    </button>
+                    <button class="btn btn-copy" onclick="copyPasswordOnly()"> Copy</button>
                 </div>
             </div>
 
-            <!-- Actions -->
             <div class="actions">
-                <button class="btn btn-refresh" onclick="refreshPassword()">
-                    🔄 Refresh Password
-                </button>
+                <button class="btn btn-refresh" onclick="refreshPassword()">🔄 Refresh Password</button>
             </div>
 
-            <!-- Combined Box -->
             <div class="combined-box">
                 <div class="copy-all-btn">
-                    <button class="btn btn-success" onclick="copyAll()">
-                        📋 Copy Semua
-                    </button>
+                    <button class="btn btn-success" onclick="copyAll()"> Copy Semua</button>
                 </div>
                 <div class="combined-content" id="combinedContent">
                     <span class="line">
@@ -1143,13 +1178,10 @@
                 </div>
             </div>
 
-            <!-- Two Column Section -->
             <div class="two-column">
                 <div class="column-box">
                     <div class="copy-btn">
-                        <button class="btn btn-warning btn-sm" onclick="copyColumnLeft()">
-                            📋 Copy
-                        </button>
+                        <button class="btn btn-warning btn-sm" onclick="copyColumnLeft()"> Copy</button>
                     </div>
                     <div class="column-content" id="columnLeftContent">
                         <span class="title">📝 Hanya user id</span>
@@ -1162,9 +1194,7 @@
 
                 <div class="column-box">
                     <div class="copy-btn">
-                        <button class="btn btn-warning btn-sm" onclick="copyColumnRight()">
-                            📋 Copy
-                        </button>
+                        <button class="btn btn-warning btn-sm" onclick="copyColumnRight()"> Copy</button>
                     </div>
                     <div class="column-content" id="columnRightContent">
                         <span class="title">🔑 Jika riset password</span>
@@ -1179,60 +1209,91 @@
 
         <!-- Page: Memo -->
         <div class="page" id="page-memo">
-            <!-- Admin Login Status -->
             <div class="admin-login-btn" id="adminStatus">
                 <div class="info">
                     👤 <span id="adminEmailDisplay">Belum Login Admin</span>
                     <span id="adminRoleDisplay" style="background: #556677; color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-left: 8px;">VIEWER</span>
                 </div>
                 <div>
-                    <button class="btn btn-google btn-sm" id="loginAdminBtn" onclick="loginWithGoogle()">
-                        🔑 Login Admin
-                    </button>
-                    <button class="btn btn-danger btn-sm" id="logoutAdminBtn" onclick="logoutUser()" style="display: none;">
-                        🚪 Logout
-                    </button>
+                    <button class="btn btn-google btn-sm" id="loginAdminBtn" onclick="loginWithGoogle()">🔑 Login Admin</button>
+                    <button class="btn btn-danger btn-sm" id="logoutAdminBtn" onclick="logoutUser()" style="display: none;">🚪 Logout</button>
                 </div>
             </div>
 
             <!-- Delay Result Panel (Admin Only) -->
             <div class="delay-panel" id="delayPanel">
-                <h4>⚠️ Panel Keterlambatan Result</h4>
+                <h4>⚙️ Panel Result Pasaran</h4>
 
                 <div class="delay-field">
                     <label>Nama Pasaran</label>
-                    <input type="text" id="delayPasaranInput" placeholder="Contoh: BULLSEYE, HONGKONG, SYDNEY..." oninput="updateDelayPreview()">
+                    <input type="text" id="delayPasaranInput" placeholder="Contoh: BULLSEYE, HONGKONG, SYDNEY..." oninput="updateDelayPreviews()">
+                </div>
+
+                <!-- Sub-section: Keterlambatan -->
+                <div class="delay-sub-title">
+                    <span class="sub-icon-red">🔴</span> Keterlambatan Result
                 </div>
 
                 <div class="toggle-row">
                     <span class="toggle-label">
-                        Tampilkan Notifikasi
+                        Tampilkan Notifikasi Keterlambatan
                         <span class="status-dot" id="delayStatusDot"></span>
                     </span>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="delayToggle" onchange="toggleDelayNotification()">
+                        <input type="checkbox" id="delayToggle" onchange="updateDelayStatusDots()">
                         <span class="toggle-slider"></span>
                     </label>
                 </div>
 
-                <!-- Preview -->
-                <div class="delay-preview" id="delayPreviewBox">
+                <div class="delay-preview preview-delay" id="delayPreviewBox">
                     <div class="preview-label">
-                        <span class="eye-icon">👁️</span> Preview Pesan
+                        <span class="eye-icon">👁️</span> Preview Keterlambatan
                     </div>
                     <div class="preview-text" id="delayPreviewText">
-                        <span class="preview-yth">Yth. Member Setia Hokbentoto</span>
+                        <span class="preview-yth">Yth. Member Setia Hokbentoto,</span>
                         Kami ingin menginformasikan bahwa untuk Pasaran <span class="preview-pasaran" id="delayPreviewPasaran">BULLSEYE</span> saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.
-                        Mohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan,<span class="preview-closing"> Terima kasih.</span>
+                        <span class="preview-closing">Mohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.</span>
                     </div>
                     <div class="copy-preview-btn">
-                        <button class="btn btn-copy btn-sm" onclick="copyDelayMessage()">📋 Copy</button>
+                        <button class="btn btn-copy btn-sm" onclick="copyDelayMessage()"> Copy</button>
                     </div>
                 </div>
 
-                <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="btn btn-success" onclick="saveDelayConfig()">💾 Simpan Pengaturan</button>
-                    <button class="btn btn-danger btn-sm" onclick="disableDelayConfig()">🗑️ Nonaktifkan</button>
+                <div class="delay-sub-divider"></div>
+
+                <!-- Sub-section: Result Sudah Keluar -->
+                <div class="delay-sub-title">
+                    <span class="sub-icon-green">🟢</span> Result Sudah Keluar
+                </div>
+
+                <div class="toggle-row">
+                    <span class="toggle-label">
+                        Tampilkan Notifikasi Result Keluar
+                        <span class="status-dot" id="resolvedStatusDot"></span>
+                    </span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="resolvedToggle" onchange="updateDelayStatusDots()">
+                        <span class="toggle-slider green"></span>
+                    </label>
+                </div>
+
+                <div class="delay-preview preview-resolved" id="resolvedPreviewBox">
+                    <div class="preview-label">
+                        <span class="eye-icon"></span> Preview Result Keluar
+                    </div>
+                    <div class="preview-text" id="resolvedPreviewText">
+                        <span class="preview-yth">Yth. Member Setia HOKBENTOTO,</span>
+                        Kami ingin menginformasikan bahwa untuk pasaran <span class="preview-pasaran-green" id="resolvedPreviewPasaran">BULLSEYE</span> saat ini sudah mengeluarkan angka result.
+                        <span class="preview-closing">Mohon maaf atas ketidaknyamanan sebelumnya, Terima kasih.</span>
+                    </div>
+                    <div class="copy-preview-btn">
+                        <button class="btn btn-copy btn-sm" onclick="copyResolvedMessage()"> Copy</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-success" onclick="saveDelayConfig()"> Simpan Pengaturan</button>
+                    <button class="btn btn-danger btn-sm" onclick="disableDelayConfig()"> Nonaktifkan Semua</button>
                 </div>
             </div>
 
@@ -1244,26 +1305,24 @@
                     <textarea id="memoBodyInput" placeholder="Isi Memo (contoh: mohon maaf bosku...)" style="flex:2; min-width:300px; padding:10px 15px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:#0a1428; color:#fff; font-size:14px; outline:none; resize:vertical; min-height:80px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;"></textarea>
                     <button class="btn btn-success" onclick="addMemo()" style="align-self:flex-start;">➕ Tambah</button>
                 </div>
-                <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()" style="margin-top:10px;">🗑️ Hapus Semua Memo</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteAllMemo()" style="margin-top:10px;"> Hapus Semua Memo</button>
             </div>
 
             <!-- Delay Notification Display (Public) -->
             <div id="delayNotificationArea"></div>
 
-            <!-- Section Divider -->
             <div class="section-divider" id="delayDivider" style="display:none;"></div>
 
             <!-- Memo List -->
             <div id="memoList" class="memo-container">
                 <div class="empty-memo">
-                    <div class="icon">📭</div>
+                    <div class="icon"></div>
                     <p>Belum ada memo. Login sebagai admin untuk menambahkan.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
     <script>
@@ -1290,7 +1349,7 @@
         let currentPassword = '';
         let currentUser = null;
         let isAdmin = false;
-        let currentDelayConfig = { enabled: false, pasaran: '' };
+        let currentDelayConfig = { delayEnabled: false, resolvedEnabled: false, pasaran: '' };
 
         // ===================== USER ID FUNCTIONS =====================
         function updateUserId() {
@@ -1376,19 +1435,21 @@
                 const data = snapshot.val();
                 if (data) {
                     currentDelayConfig = {
-                        enabled: data.enabled || false,
+                        delayEnabled: data.delayEnabled || false,
+                        resolvedEnabled: data.resolvedEnabled || false,
                         pasaran: data.pasaran || ''
                     };
                 } else {
-                    currentDelayConfig = { enabled: false, pasaran: '' };
+                    currentDelayConfig = { delayEnabled: false, resolvedEnabled: false, pasaran: '' };
                 }
 
                 // Update admin panel fields
                 if (isAdmin) {
                     document.getElementById('delayPasaranInput').value = currentDelayConfig.pasaran;
-                    document.getElementById('delayToggle').checked = currentDelayConfig.enabled;
-                    updateDelayStatusDot();
-                    updateDelayPreview();
+                    document.getElementById('delayToggle').checked = currentDelayConfig.delayEnabled;
+                    document.getElementById('resolvedToggle').checked = currentDelayConfig.resolvedEnabled;
+                    updateDelayStatusDots();
+                    updateDelayPreviews();
                 }
 
                 // Render public notification
@@ -1398,23 +1459,20 @@
             });
         }
 
-        function updateDelayPreview() {
+        function updateDelayPreviews() {
             const pasaran = document.getElementById('delayPasaranInput').value.trim() || '...';
             document.getElementById('delayPreviewPasaran').textContent = pasaran.toUpperCase();
+            document.getElementById('resolvedPreviewPasaran').textContent = pasaran.toUpperCase();
         }
 
-        function updateDelayStatusDot() {
-            const dot = document.getElementById('delayStatusDot');
-            const isOn = document.getElementById('delayToggle').checked;
-            if (isOn) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
-        }
+        function updateDelayStatusDots() {
+            const delayDot = document.getElementById('delayStatusDot');
+            const resolvedDot = document.getElementById('resolvedStatusDot');
+            const isDelayOn = document.getElementById('delayToggle').checked;
+            const isResolvedOn = document.getElementById('resolvedToggle').checked;
 
-        function toggleDelayNotification() {
-            updateDelayStatusDot();
+            delayDot.className = 'status-dot' + (isDelayOn ? ' active-red' : '');
+            resolvedDot.className = 'status-dot' + (isResolvedOn ? ' active' : '');
         }
 
         function saveDelayConfig() {
@@ -1424,21 +1482,23 @@
             }
 
             const pasaran = document.getElementById('delayPasaranInput').value.trim();
-            const enabled = document.getElementById('delayToggle').checked;
+            const delayEnabled = document.getElementById('delayToggle').checked;
+            const resolvedEnabled = document.getElementById('resolvedToggle').checked;
 
-            if (enabled && !pasaran) {
-                showToast('⚠️ Nama pasaran harus diisi jika notifikasi diaktifkan!');
+            if ((delayEnabled || resolvedEnabled) && !pasaran) {
+                showToast('⚠️ Nama pasaran harus diisi jika ada notifikasi yang diaktifkan!');
                 return;
             }
 
             const delayRef = database.ref(DELAY_PATH);
             delayRef.set({
-                enabled: enabled,
                 pasaran: pasaran.toUpperCase(),
+                delayEnabled: delayEnabled,
+                resolvedEnabled: resolvedEnabled,
                 updatedAt: Date.now(),
                 updatedBy: currentUser ? currentUser.email : 'admin'
             }).then(() => {
-                showToast('✅ Pengaturan keterlambatan result berhasil disimpan!');
+                showToast('✅ Pengaturan result pasaran berhasil disimpan!');
             }).catch((error) => {
                 showToast('❌ Gagal menyimpan: ' + error.message);
             });
@@ -1449,16 +1509,18 @@
 
             const delayRef = database.ref(DELAY_PATH);
             delayRef.set({
-                enabled: false,
                 pasaran: '',
+                delayEnabled: false,
+                resolvedEnabled: false,
                 updatedAt: Date.now(),
                 updatedBy: currentUser ? currentUser.email : 'admin'
             }).then(() => {
                 document.getElementById('delayPasaranInput').value = '';
                 document.getElementById('delayToggle').checked = false;
-                updateDelayStatusDot();
-                updateDelayPreview();
-                showToast('✅ Notifikasi keterlambatan berhasil dinonaktifkan!');
+                document.getElementById('resolvedToggle').checked = false;
+                updateDelayStatusDots();
+                updateDelayPreviews();
+                showToast('✅ Semua notifikasi berhasil dinonaktifkan!');
             }).catch((error) => {
                 showToast('❌ Gagal menonaktifkan: ' + error.message);
             });
@@ -1467,48 +1529,89 @@
         function renderDelayNotification() {
             const area = document.getElementById('delayNotificationArea');
             const divider = document.getElementById('delayDivider');
+            let html = '';
+            let hasAny = false;
 
-            if (currentDelayConfig.enabled && currentDelayConfig.pasaran) {
+            // Keterlambatan Result Card
+            if (currentDelayConfig.delayEnabled && currentDelayConfig.pasaran) {
+                hasAny = true;
                 const pasaranName = escapeHtml(currentDelayConfig.pasaran);
-                const fullText = `Yth. Member Setia Hokbentoto\nKami ingin menginformasikan bahwa untuk Pasaran ${pasaranName} saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.\nMohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.`;
+                const delayText = `Yth. Member Setia Hokbentoto,\nKami ingin menginformasikan bahwa untuk Pasaran ${pasaranName} saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.\nMohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.`;
 
-                area.innerHTML = `
-                    <div class="delay-notification-card" data-delay-text="${escapeHtml(fullText)}">
+                html += `
+                    <div class="delay-notification-card card-delay" data-delay-text="${escapeHtml(delayText)}" style="margin-bottom: 15px;">
                         <div class="delay-icon-badge">
                             <span class="pulse-dot"></span>
                             Keterlambatan Result
                         </div>
                         <div class="delay-body">
-                            <span class="delay-yth">Yth. Member Setia Hokbentoto</span>
+                            <span class="delay-yth">Yth. Member Setia Hokbentoto,</span>
                             Kami ingin menginformasikan bahwa untuk Pasaran <span class="delay-pasaran-name">${pasaranName}</span> saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.
                             <span class="delay-closing">Mohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.</span>
                         </div>
                         <div class="delay-copy-btn">
-                            <button class="btn btn-copy btn-sm" onclick="copyDelayNotification()">📋 Copy</button>
+                            <button class="btn btn-copy btn-sm" onclick="copyDelayNotification('delay')"> Copy</button>
                         </div>
                     </div>
                 `;
-                divider.style.display = 'block';
-            } else {
-                area.innerHTML = '';
-                divider.style.display = 'none';
             }
+
+            // Result Sudah Keluar Card
+            if (currentDelayConfig.resolvedEnabled && currentDelayConfig.pasaran) {
+                hasAny = true;
+                const pasaranName = escapeHtml(currentDelayConfig.pasaran);
+                const resolvedText = `Yth. Member Setia HOKBENTOTO,\nKami ingin menginformasikan bahwa untuk pasaran ${pasaranName} saat ini sudah mengeluarkan angka result.\nMohon maaf atas ketidaknyamanan sebelumnya, Terima kasih.`;
+
+                html += `
+                    <div class="delay-notification-card card-resolved" data-resolved-text="${escapeHtml(resolvedText)}" style="margin-bottom: 15px;">
+                        <div class="delay-icon-badge">
+                            <span class="pulse-dot"></span>
+                            Result Sudah Keluar
+                        </div>
+                        <div class="delay-body">
+                            <span class="delay-yth">Yth. Member Setia HOKBENTOTO,</span>
+                            Kami ingin menginformasikan bahwa untuk pasaran <span class="delay-pasaran-name">${pasaranName}</span> saat ini sudah mengeluarkan angka result.
+                            <span class="delay-closing">Mohon maaf atas ketidaknyamanan sebelumnya, Terima kasih.</span>
+                        </div>
+                        <div class="delay-copy-btn">
+                            <button class="btn btn-copy btn-sm" onclick="copyDelayNotification('resolved')"> Copy</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            area.innerHTML = html;
+            divider.style.display = hasAny ? 'block' : 'none';
         }
 
-        function copyDelayNotification() {
-            const card = document.querySelector('.delay-notification-card');
-            if (!card) {
+        function copyDelayNotification(type) {
+            let text = '';
+            if (type === 'delay') {
+                const card = document.querySelector('.card-delay');
+                text = card ? card.dataset.delayText : '';
+            } else if (type === 'resolved') {
+                const card = document.querySelector('.card-resolved');
+                text = card ? card.dataset.resolvedText : '';
+            }
+
+            if (!text) {
                 showToast('⚠️ Tidak ada notifikasi untuk disalin');
                 return;
             }
-            const text = card.dataset.delayText || '';
-            copyToClipboard(text, '✅ Pesan keterlambatan berhasil disalin!');
+
+            copyToClipboard(text, '✅ Pesan berhasil disalin!');
         }
 
         function copyDelayMessage() {
             const pasaran = document.getElementById('delayPasaranInput').value.trim() || '...';
-            const text = `Yth. Member Setia Hokbentoto\nKami ingin menginformasikan bahwa untuk Pasaran ${pasaran.toUpperCase()} saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.\nMohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.`;
+            const text = `Yth. Member Setia Hokbentoto,\nKami ingin menginformasikan bahwa untuk Pasaran ${pasaran.toUpperCase()} saat ini terjadi keterlambatan result dari pihak penyedia belum mengeluarkan angka result.\nMohon kesabarannya menunggu dan untuk estimasi waktu tidak dapat ditentukan, Terima kasih.`;
             copyToClipboard(text, '✅ Pesan keterlambatan berhasil disalin!');
+        }
+
+        function copyResolvedMessage() {
+            const pasaran = document.getElementById('delayPasaranInput').value.trim() || '...';
+            const text = `Yth. Member Setia HOKBENTOTO,\nKami ingin menginformasikan bahwa untuk pasaran ${pasaran.toUpperCase()} saat ini sudah mengeluarkan angka result.\nMohon maaf atas ketidaknyamanan sebelumnya, Terima kasih.`;
+            copyToClipboard(text, '✅ Pesan result keluar berhasil disalin!');
         }
 
         // ===================== MEMO FUNCTIONS =====================
@@ -1531,7 +1634,7 @@
                 } else {
                     memoList.innerHTML = `
                         <div class="empty-memo">
-                            <div class="icon">📭</div>
+                            <div class="icon"></div>
                             <p>Belum ada memo. Login sebagai admin untuk menambahkan.</p>
                         </div>
                     `;
@@ -1553,7 +1656,7 @@
             if (memos.length === 0) {
                 memoList.innerHTML = `
                     <div class="empty-memo">
-                        <div class="icon">📭</div>
+                        <div class="icon"></div>
                         <p>Belum ada memo. Login sebagai admin untuk menambahkan.</p>
                     </div>
                 `;
@@ -1569,9 +1672,9 @@
                         <div class="memo-body">${bodyHtml}</div>
                         <span class="memo-id">ID: ${memo.id.substring(0, 8)}</span>
                         <div class="memo-actions">
-                            <button class="btn btn-copy btn-sm" onclick="copyMemo('${memo.id}')">📋 Copy</button>
+                            <button class="btn btn-copy btn-sm" onclick="copyMemo('${memo.id}')"> Copy</button>
                             ${isAdmin ? `
-                                <button class="btn btn-danger btn-sm" onclick="deleteMemo('${memo.id}')">🗑️</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteMemo('${memo.id}')"></button>
                             ` : ''}
                         </div>
                     </div>
@@ -1702,9 +1805,8 @@
             pwdDisplay.textContent = currentPassword;
             pwdDisplay3.textContent = currentPassword;
 
-            // Flash animation
             pwdDisplay.classList.remove('just-refreshed');
-            void pwdDisplay.offsetWidth; // reflow trigger
+            void pwdDisplay.offsetWidth;
             pwdDisplay.classList.add('just-refreshed');
 
             showToast('🔄 Password berhasil di-refresh!');
